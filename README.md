@@ -11,7 +11,7 @@ This repository is for a system that will accept logins from hospital staff and 
 
 ## The Team
 
-Joseph Durko (jsd94@Drexel.edu) 			-  Engineer
-Kaushik Mukherjee (km3762@Drexel.edu)		-  Architect
-Taiwo Oyesanmi (ot22@Drexel.edu) 		-  Engineer
-Wendy Prayer (wp86@Drexel.edu)			-  Architect
+- Joseph Durko (jsd94@Drexel.edu) 			-  Engineer
+- Kaushik Mukherjee (km3762@Drexel.edu)		-  Architect
+- Taiwo Oyesanmi (ot22@Drexel.edu) 		-  Engineer
+- Wendy Prayer (wp86@Drexel.edu)			-  Architect
