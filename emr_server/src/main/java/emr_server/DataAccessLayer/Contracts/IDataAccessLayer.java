@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface IDataAccessLayer {
     // Creation
-    boolean AddPatient(Patient patient);
+    boolean AddPatient(PatientInfo patient);
     boolean AddLabRecord(LabRecord record);
     boolean AddAppointment(Appointment appointment);
     boolean UploadDocument(Document document);
@@ -17,33 +17,33 @@ public interface IDataAccessLayer {
     // Retrieval
     Patient GetPatientByID(UUID id);
     Patient GetPatientBySSN(String ssn);
-    Set<Patient> GetAllPatients();
+    Set<PatientInfo> GetAllPatientInfo();
 
     LabRecord GetLabRecordByID(UUID id);
     Set<LabRecord> GetAllLabRecords();
-    Set<LabRecord> GetAllLabRecordsByPatient(Patient patient);
-    Set<LabRecord> GetAllLabRecordsByDate(Date date);
+    Set<LabRecord> GetAllLabRecordsByPatient(PatientInfo patient);
+    Set<LabRecord> GetAllLabRecordsByDateRange(Date startDate, Date endDate);
 
     Appointment GetAppointmentByID(UUID id);
     Set<Appointment> GetAllAppointments();
-    Set<Appointment> GetAllAppointmentsByPatient(Patient patient);
-    Set<Appointment> GetAllAppointmentsByDate(Date date);
+    Set<Appointment> GetAllAppointmentsByPatient(PatientInfo patient);
+    Set<Appointment> GetAllAppointmentsByDateRange(Date startDate, Date endDate);
 
     Document GetDocumentByID(UUID id);
     Set<Document> GetAllDocuments();
-    Set<Document> GetAllDocumentsByPatient(Patient patient);
+    Set<Document> GetAllDocumentsByPatient(PatientInfo patient);
 
     MedicalStaff GetStaffByID(UUID id);
     MedicalStaff GetStaffByName(Name name);
     Set<MedicalStaff> GetAllStaff();
 
     // Update
-    boolean UpdatePatient(Patient patient);
+    boolean UpdatePatient(PatientInfo patient);
     boolean UpdateAppointment(Appointment appointment);
     boolean UpdateStaff(MedicalStaff staff);
 
     // Removal
-    boolean RemovePatient(Patient patient);
+    boolean RemovePatient(PatientInfo patient);
     boolean RemoveAppointment(Appointment appointment);
     boolean RemoveLabRecord(LabRecord labRecord);
     boolean RemoveDocument(Document document);

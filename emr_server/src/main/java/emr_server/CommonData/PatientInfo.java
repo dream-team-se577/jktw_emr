@@ -1,19 +1,17 @@
 package emr_server.CommonData;
 
-import emr_server.CommonData.Contact;
-import emr_server.CommonData.Name;
-
 import java.util.UUID;
 
-public class MedicalStaff {
-    public MedicalStaff (UUID id)
+public class PatientInfo {
+    public PatientInfo(UUID id, String ssn)
     {
         this.id = id;
+        this.ssn = ssn;
     }
 
     @Override
     public int hashCode() {
-        return getId().hashCode();
+        return id.hashCode();
     }
 
     @Override
@@ -22,13 +20,18 @@ public class MedicalStaff {
         if (o == null) return false;
         if (this.getClass() != o.getClass()) return false;
 
-        MedicalStaff patient = (MedicalStaff) o;
+        PatientInfo patient = (PatientInfo) o;
 
-        return patient.getId() == this.getId();
+        return patient.id == this.id;
     }
 
-    public UUID getId() {
+    public UUID getId()
+    {
         return id;
+    }
+
+    public String getSsn() {
+        return ssn;
     }
 
     public Name getName() {
@@ -39,10 +42,6 @@ public class MedicalStaff {
         return contact;
     }
 
-    public String getRole() {
-        return role;
-    }
-
     public void setName(Name name) {
         this.name = name;
     }
@@ -51,12 +50,8 @@ public class MedicalStaff {
         this.contact = contact;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     private UUID id;
+    private String ssn;
     private Name name;
     private Contact contact;
-    private String role;
 }

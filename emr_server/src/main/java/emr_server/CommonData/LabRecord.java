@@ -4,12 +4,28 @@ import java.util.Date;
 import java.util.UUID;
 
 public class LabRecord {
-    public LabRecord(UUID id, Date date, String results, Patient patient, String type) {
+    public LabRecord(UUID id, Date date, String results, PatientInfo patient, String type) {
         this.id = id;
         this.date = date;
         this.results = results;
         this.patient = patient;
         this.type = type;
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if (this.getClass() != o.getClass()) return false;
+
+        LabRecord patient = (LabRecord) o;
+
+        return patient.getId() == this.getId();
     }
 
     public UUID getId() {
@@ -24,7 +40,7 @@ public class LabRecord {
         return results;
     }
 
-    public Patient getPatient() {
+    public PatientInfo getPatient() {
         return patient;
     }
 
@@ -35,6 +51,6 @@ public class LabRecord {
     private UUID id;
     private Date date;
     private String results;
-    private Patient patient;
+    private PatientInfo patient;
     private String type;
 }

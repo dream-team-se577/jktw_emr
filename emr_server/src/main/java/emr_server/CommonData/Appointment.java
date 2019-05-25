@@ -5,7 +5,23 @@ import java.util.*;
 public class Appointment {
     public Appointment(UUID id) {
         this.id = id;
-        this.staff = new HashSet<MedicalStaff>();
+        this.staff = new HashSet<>();
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if (this.getClass() != o.getClass()) return false;
+
+        Appointment patient = (Appointment) o;
+
+        return patient.getId() == this.getId();
     }
 
     public UUID getId() {
@@ -20,7 +36,7 @@ public class Appointment {
         return description;
     }
 
-    public Patient getPatient() {
+    public PatientInfo getPatient() {
         return patient;
     }
 
@@ -48,7 +64,7 @@ public class Appointment {
         this.description = description;
     }
 
-    public void setPatient(Patient patient) {
+    public void setPatient(PatientInfo patient) {
         this.patient = patient;
     }
 
@@ -59,7 +75,7 @@ public class Appointment {
     private UUID id;
     private Date date;
     private String description;
-    private Patient patient;
+    private PatientInfo patient;
     private String type;
     private Set<MedicalStaff> staff;
 }
