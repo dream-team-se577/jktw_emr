@@ -6,9 +6,9 @@ import java.util.Set;
 
 public interface IBusinessLogicLayer {
     // Patient Commands
-    boolean RegisterPatient(Patient patient);
+    boolean RegisterPatient(PatientInfo patient);
 
-    boolean UpdatePatient(Patient patient);
+    boolean UpdatePatient(PatientInfo patient);
 
     boolean AttachDocument(Document doc);
 
@@ -21,7 +21,7 @@ public interface IBusinessLogicLayer {
     // Patient Queries
     Patient GetPatient(String ssn);
 
-    Set<Document> GetDocuments(Patient patient);
+    Set<Document> GetDocuments(PatientInfo patient);
 
     Set<Patient> SearchPatients(PatientSearch search);
 

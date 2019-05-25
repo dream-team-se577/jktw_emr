@@ -6,40 +6,49 @@ import java.util.List;
 import java.util.UUID;
 
 public class Patient {
-    public Patient(UUID id)
+    @Override
+    public int hashCode() {
+        return info.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if (this.getClass() != o.getClass()) return false;
+
+        Patient patient = (Patient) o;
+
+        return patient.getInfo() == this.info;
+    }
+
+    public Patient(PatientInfo info)
     {
-        this.id = id;
+        this.info = info;
+        labRecords = new ArrayList<>();
+        appointments = new ArrayList<>();
     }
 
-    public UUID getId() {
-        return id;
+    public PatientInfo getInfo() {
+        return info;
     }
 
-    public String getSsn() {
-        return ssn;
+    public void setInfo(PatientInfo info) {
+        // ID should not change, if so it's a different patient
+        assert info.getId() == this.info.getId();
+        this.info = info;
     }
 
-    public Name getName() {
-        return name;
-    }
-
-    public Contact getContact() {
-        return contact;
-    }
-
-    public void AddRecord(LabRecord record)
+    public void addRecord(LabRecord record)
     {
+        assert record.getPatient().getId().equals(this.getInfo().getId());
         labRecords.add(record);
     }
 
-    public void AddAppointment(Appointment appointment)
+    public void addAppointment(Appointment appointment)
     {
+        assert appointment.getPatient().getId().equals(this.getInfo().getId());
         appointments.add(appointment);
-    }
-
-    public void CancelAppointment(Appointment appointment)
-    {
-        appointments.remove(appointment);
     }
 
     public List<LabRecord> getLabRecords() {
@@ -50,18 +59,7 @@ public class Patient {
         return Collections.unmodifiableList(appointments);
     }
 
-    public void setName(Name name) {
-        this.name = name;
-    }
-
-    public void setContact(Contact contact) {
-        this.contact = contact;
-    }
-
-    private UUID id;
-    private String ssn;
-    private Name name;
-    private Contact contact;
     private ArrayList<LabRecord> labRecords;
     private ArrayList<Appointment> appointments;
+    private PatientInfo info;
 }

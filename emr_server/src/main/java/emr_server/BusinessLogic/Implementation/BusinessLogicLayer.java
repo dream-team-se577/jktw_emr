@@ -13,10 +13,10 @@ public class BusinessLogicLayer implements IBusinessLogicLayer {
     }
 
     @Override
-    public boolean RegisterPatient(Patient newPatient) {
+    public boolean RegisterPatient(PatientInfo newPatient) {
         // Verify that the patient does not share an SSN with an existing patient
-        Set<Patient> patients = dataLayer.GetAllPatients();
-        for (Patient patient : patients)
+        Set<PatientInfo> patients = dataLayer.GetAllPatientInfo();
+        for (PatientInfo patient : patients)
         {
             if (patient.getSsn().equals(newPatient.getSsn()))
                 return false;
@@ -30,22 +30,11 @@ public class BusinessLogicLayer implements IBusinessLogicLayer {
     @Override
     public Patient GetPatient(String ssn) {
         Patient patient = dataLayer.GetPatientBySSN(ssn);
-
-        for (LabRecord record : dataLayer.GetAllLabRecordsByPatient(patient))
-        {
-            patient.AddRecord(record);
-        }
-
-        for (Appointment appointment : dataLayer.GetAllAppointmentsByPatient(patient))
-        {
-            patient.AddAppointment(appointment);
-        }
-
         return patient;
     }
 
     @Override
-    public boolean UpdatePatient(Patient patient) {
+    public boolean UpdatePatient(PatientInfo patient) {
         return dataLayer.UpdatePatient(patient);
     }
 
@@ -74,7 +63,7 @@ public class BusinessLogicLayer implements IBusinessLogicLayer {
     }
 
     @Override
-    public Set<Document> GetDocuments(Patient patient) {
+    public Set<Document> GetDocuments(PatientInfo patient) {
         return dataLayer.GetAllDocumentsByPatient(patient);
     }
 
