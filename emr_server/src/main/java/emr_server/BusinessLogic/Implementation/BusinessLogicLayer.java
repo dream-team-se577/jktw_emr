@@ -5,6 +5,8 @@ import emr_server.BusinessLogic.Contracts.IBusinessLogicLayer;
 import emr_server.DataAccessLayer.Contracts.IDataAccessLayer;
 
 import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class BusinessLogicLayer implements IBusinessLogicLayer {
     public BusinessLogicLayer(IDataAccessLayer dataLayer)
@@ -34,14 +36,31 @@ public class BusinessLogicLayer implements IBusinessLogicLayer {
     }
 
     @Override
+    public Patient GetPatient(UUID id) {
+        Patient patient = dataLayer.GetPatientByID(id);
+        return patient;
+    }
+
+    @Override
     public boolean UpdatePatient(PatientInfo patient) {
+        // Verify that the patient does not share an SSN with an existing patient
+        Set<PatientInfo> patients = dataLayer.GetAllPatientInfo();
+        for (PatientInfo p : patients)
+        {
+            if (p.equals(patient))
+                continue;
+
+            if (patient.getSsn().equals(p.getSsn()))
+                return false;
+        }
+
         return dataLayer.UpdatePatient(patient);
     }
 
     @Override
     public boolean AttachDocument(Document doc) {
         // Verify that the patient exists for the doc
-        if (dataLayer.GetPatientByID(doc.getPatient().getId()) == null)
+        if (dataLayer.GetPatientByID(doc.getInfo().getPatient().getId()) == null)
             return false;
 
         return dataLayer.UploadDocument(doc);
@@ -49,6 +68,10 @@ public class BusinessLogicLayer implements IBusinessLogicLayer {
 
     @Override
     public boolean AddLabRecord(LabRecord record) {
+        // Verify that the patient exists for the doc
+        if (dataLayer.GetPatientByID(record.getPatient().getId()) == null)
+            return false;
+
         return dataLayer.AddLabRecord(record);
     }
 
@@ -58,13 +81,23 @@ public class BusinessLogicLayer implements IBusinessLogicLayer {
     }
 
     @Override
-    public boolean CancelAppointment(Appointment appointment) {
+    public boolean CancelAppointment(UUID id) {
+        Appointment appointment = dataLayer.GetAppointmentByID(id);
+        if (appointment == null)
+            return false;
+
         return dataLayer.RemoveAppointment(appointment);
     }
 
     @Override
-    public Set<Document> GetDocuments(PatientInfo patient) {
-        return dataLayer.GetAllDocumentsByPatient(patient);
+    public Document GetDocument(UUID id)
+    {
+        return dataLayer.GetDocumentByID(id);
+    }
+
+    @Override
+    public Set<DocumentInfo> GetDocuments(PatientInfo patient) {
+        return dataLayer.GetAllDocumentsByPatient(patient).stream().map(x -> x.getInfo()).collect(Collectors.toSet());
     }
 
     @Override
@@ -82,8 +115,12 @@ public class BusinessLogicLayer implements IBusinessLogicLayer {
     }
 
     @Override
-    public boolean RemoveStaff(MedicalStaff staff) {
-        return dataLayer.RemoveStaff(staff);
+    public boolean RemoveStaff(UUID id) {
+        MedicalStaff staffMember = dataLayer.GetStaffByID(id);
+        if (staffMember == null)
+            return false;
+
+        return dataLayer.RemoveStaff(staffMember);
     }
 
     @Override
@@ -94,6 +131,11 @@ public class BusinessLogicLayer implements IBusinessLogicLayer {
     @Override
     public MedicalStaff GetStaff(Name name) {
         return dataLayer.GetStaffByName(name);
+    }
+
+    @Override
+    public MedicalStaff GetStaff(UUID id) {
+        return dataLayer.GetStaffByID(id);
     }
 
     @Override
