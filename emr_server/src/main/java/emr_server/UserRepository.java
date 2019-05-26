@@ -1,4 +1,4 @@
-package emr_server;
+/*package emr_server;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -9,4 +9,4 @@ import emr_server.User;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
 
-}
+}*/

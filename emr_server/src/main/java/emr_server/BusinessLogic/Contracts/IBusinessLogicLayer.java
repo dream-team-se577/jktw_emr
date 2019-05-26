@@ -3,6 +3,7 @@ package emr_server.BusinessLogic.Contracts;
 import emr_server.CommonData.*;
 
 import java.util.Set;
+import java.util.UUID;
 
 public interface IBusinessLogicLayer {
     // Patient Commands
@@ -16,24 +17,30 @@ public interface IBusinessLogicLayer {
 
     boolean ScheduleAppointment(Appointment appointment);
 
-    boolean CancelAppointment (Appointment appointment);
+    boolean CancelAppointment (UUID id);
 
     // Patient Queries
     Patient GetPatient(String ssn);
 
-    Set<Document> GetDocuments(PatientInfo patient);
+    Patient GetPatient(UUID id);
+
+    Document GetDocument(UUID id);
+
+    Set<DocumentInfo> GetDocuments(PatientInfo patient);
 
     Set<Patient> SearchPatients(PatientSearch search);
 
     // Staff Commands
     boolean CreateStaff(MedicalStaff staff);
 
-    boolean RemoveStaff(MedicalStaff staff);
+    boolean RemoveStaff(UUID staff);
 
     boolean UpdateStaff(MedicalStaff staff);
 
     // Staff Queries
     MedicalStaff GetStaff(Name name);
+
+    MedicalStaff GetStaff(UUID id);
 
     Set<MedicalStaff> GetAllStaff();
 }

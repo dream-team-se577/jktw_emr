@@ -1,18 +1,14 @@
 package emr_server.CommonData;
 
-import java.util.UUID;
-
 public class Document {
-    public Document(UUID id, PatientInfo patient, String description, byte[] document) {
-        this.id = id;
-        this.patient = patient;
-        this.description = description;
+    public Document(DocumentInfo info, byte[] document) {
         this.document = document;
+        this.documentInfo = info;
     }
 
     @Override
     public int hashCode() {
-        return getId().hashCode();
+        return documentInfo.hashCode();
     }
 
     @Override
@@ -23,27 +19,17 @@ public class Document {
 
         Document patient = (Document) o;
 
-        return patient.getId() == this.getId();
+        return patient.getInfo() == this.getInfo();
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public PatientInfo getPatient() {
-        return patient;
-    }
-
-    public String getDescription() {
-        return description;
+    public DocumentInfo getInfo() {
+        return documentInfo;
     }
 
     public byte[] getDocument() {
         return document;
     }
 
-    private UUID id;
-    private PatientInfo patient;
-    private String description;
+    private DocumentInfo documentInfo;
     private byte[] document;
 }

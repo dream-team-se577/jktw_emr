@@ -50,10 +50,10 @@ public class InMemoryDataAccessLayer implements IDataAccessLayer {
 
     @Override
     public boolean UploadDocument(Document document) {
-        if (documents.containsKey(document.getId()))
+        if (documents.containsKey(document.getInfo().getId()))
             return false;
 
-        documents.put(document.getId(), document);
+        documents.put(document.getInfo().getId(), document);
         return true;
     }
 
@@ -171,7 +171,7 @@ public class InMemoryDataAccessLayer implements IDataAccessLayer {
         HashSet<Document> result = new HashSet<>();
         for (Document document : documents.values())
         {
-            if (document.getPatient().equals(patient))
+            if (document.getInfo().getPatient().equals(patient))
                 result.add(document);
         }
 
@@ -258,10 +258,10 @@ public class InMemoryDataAccessLayer implements IDataAccessLayer {
 
     @Override
     public boolean RemoveDocument(Document document) {
-        if (!documents.containsKey(document.getId()))
+        if (!documents.containsKey(document.getInfo().getId()))
             return false;
 
-        documents.remove(document.getId());
+        documents.remove(document.getInfo().getId());
         return true;
     }
 

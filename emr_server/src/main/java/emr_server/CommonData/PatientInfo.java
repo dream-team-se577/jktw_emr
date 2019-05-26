@@ -34,6 +34,10 @@ public class PatientInfo {
         return ssn;
     }
 
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
+    }
+
     public Name getName() {
         return name;
     }
