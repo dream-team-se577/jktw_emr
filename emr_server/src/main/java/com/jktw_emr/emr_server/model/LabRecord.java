@@ -6,9 +6,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property  = "id",
-        scope     = Integer.class)
 public class LabRecord {
     public int getId() {
         return id;
@@ -51,13 +48,12 @@ public class LabRecord {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date date;
     private String results;
     @ManyToOne
-    @JoinColumn(name="patient_id")
     private Patient patient;
     private String type;
 }

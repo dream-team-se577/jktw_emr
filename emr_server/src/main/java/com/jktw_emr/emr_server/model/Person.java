@@ -35,7 +35,7 @@ public abstract class Person {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PERSON_ID")
     @JsonProperty(value="person_id")
     private int id;

@@ -7,9 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property  = "id",
-        scope     = Integer.class)
 public class Appointment {
 
     public int getId() {
@@ -61,13 +58,12 @@ public class Appointment {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date date;
     private String description;
     @ManyToOne
-    @JoinColumn(name="patient_id")
     private Patient patient;
     private String type;
     @OneToMany(cascade={CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
