@@ -35,11 +35,4 @@ export class StaffsComponent implements OnInit {
 		this.staffs = this.staffs.filter(h => h !== staff);
 		this.staffService.deleteStaff(staff).subscribe();
 	}
-	
-	/*staff: Staff = {
-		uuid: 1,
-		name: 'Windstorm',
-		contact: 'fam 1',
-		role: 2
-	};*/
 }

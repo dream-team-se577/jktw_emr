@@ -1,5 +1,5 @@
 export class Staff {
-	uuid: number;
+	id: number;
 	name: string;
 	contact: string;
 	role: number;
