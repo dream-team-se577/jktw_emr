@@ -20,8 +20,8 @@ export class StaffDetailComponent implements OnInit {
 	}
   
 	getStaff(): void {
-		const uuid = +this.route.snapshot.paramMap.get('uuid');
-		this.staffService.getStaff(uuid)
+		const id = +this.route.snapshot.paramMap.get('id');
+		this.staffService.getStaff(id)
 		.subscribe(staff => this.staff = staff);
 	}
   

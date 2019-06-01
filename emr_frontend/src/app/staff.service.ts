@@ -23,55 +23,55 @@ export class StaffService {
 		);
 	}
 	
-	/** GET staff by uuid. Return `undefined` when uuid not found */
-	getStaffNo404<Data>(uuid: number): Observable<Staff> {
-		const url = `${this.staffsUrl}/?uuid=${uuid}`;
+	/** GET staff by id. Return `undefined` when id not found */
+	getStaffNo404<Data>(id: number): Observable<Staff> {
+		const url = `${this.staffsUrl}/?id=${id}`;
 		return this.http.get<Staff[]>(url).pipe(
 			map(staffs => staffs[0]), // returns a {0|1} element array
 			tap(h => {const outcome = h ? `fetched` : `did not find`;
-				this.log(`${outcome} staff uuid=${uuid}`);
+				this.log(`${outcome} staff id=${id}`);
 			}),
-			catchError(this.handleError<Staff>(`getStaff uuid=${uuid}`))
+			catchError(this.handleError<Staff>(`getStaff id=${id}`))
 		);
 	}
     
-	/** GET staff by uuid. Will 404 if uuid not found */
-	getStaff(uuid: number): Observable<Staff> {
-		const url = `${this.staffsUrl}/${uuid}`;
+	/** GET staff by id. Will 404 if id not found */
+	getStaff(id: number): Observable<Staff> {
+		const url = `${this.staffsUrl}/${id}`;
 		return this.http.get<Staff>(url).pipe(
-			tap(_ => this.log(`fetched staff uuid=${uuid}`)),
-			catchError(this.handleError<Staff>(`getStaff uuid=${uuid}`))
+			tap(_ => this.log(`fetched staff id=${id}`)),
+			catchError(this.handleError<Staff>(`getStaff id=${id}`))
 		);
 	}
 	
 	//////// Save methods //////////
  
-  /** POST: add a new staff to the server */
-  addStaff (staff: Staff): Observable<Staff> {
-    return this.http.post<Staff>(this.staffsUrl, staff, httpOptions).pipe(
-      tap((newStaff: Staff) => this.log(`added staff w/ uuid=${newStaff.uuid}`)),
-      catchError(this.handleError<Staff>('addStaff'))
-    );
-  }
+	/** POST: add a new staff to the server */
+	addStaff (staff: Staff): Observable<Staff> {
+		return this.http.post<Staff>(this.staffsUrl, staff, httpOptions).pipe(
+			tap((newStaff: Staff) => this.log(`added staff w/ id=${newStaff.id}`)),
+			catchError(this.handleError<Staff>('addStaff'))
+		);
+	}
  
-  /** DELETE: delete the staff from the server */
-  deleteStaff (staff: Staff | number): Observable<Staff> {
-    const uuid = typeof staff === 'number' ? staff : staff.uuid;
-    const url = `${this.staffsUrl}/${uuid}`;
+	/** DELETE: delete the staff from the server */
+	deleteStaff (staff: Staff | number): Observable<Staff> {
+		const id = typeof staff === 'number' ? staff : staff.id;
+		const url = `${this.staffsUrl}/${id}`;
+    
+		return this.http.delete<Staff>(url, httpOptions).pipe(
+			tap(_ => this.log(`deleted staff id=${id}`)),
+		catchError(this.handleError<Staff>('deleteStaff'))
+		);
+	}
  
-    return this.http.delete<Staff>(url, httpOptions).pipe(
-      tap(_ => this.log(`deleted staff uuid=${uuid}`)),
-      catchError(this.handleError<Staff>('deleteStaff'))
-    );
-  }
- 
-  /** PUT: update the staff on the server */
-  updateStaff (staff: Staff): Observable<any> {
-    return this.http.put(this.staffsUrl, staff, httpOptions).pipe(
-      tap(_ => this.log(`updated staff uuid=${staff.uuid}`)),
-      catchError(this.handleError<any>('updateStaff'))
-    );
-  }
+	/** PUT: update the staff on the server */
+	updateStaff (staff: Staff): Observable<any> {
+		return this.http.put(this.staffsUrl, staff, httpOptions).pipe(
+			tap(_ => this.log(`updated staff id=${staff.id}`)),
+		catchError(this.handleError<any>('updateStaff'))
+		);
+	}
 	
 	/**
 	* Handle Http operation that failed.

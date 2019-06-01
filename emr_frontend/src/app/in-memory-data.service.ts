@@ -6,16 +6,16 @@ import { Injectable } from '@angular/core';
 export class InMemoryDataService implements InMemoryDbService {
 	createDb() {
 		const staffs = [
-			{ uuid: 11, name: 'Mr. Nice', contact: 'contact 1', role: 1},
-			{ uuid: 12, name: 'Narco', contact: 'contact 2', role: 2 },
-			{ uuid: 13, name: 'Bombasto', contact: 'contact 3', role: 3 },
-			{ uuid: 14, name: 'Celeritas', contact: 'contact 4', role: 4 },
-			{ uuid: 15, name: 'Magneta', contact: 'contact 5', role: 5 },
-			{ uuid: 16, name: 'RubberMan', contact: 'contact 6', role: 6 },
-			{ uuid: 17, name: 'Dynama', contact: 'contact 7', role: 7 },
-			{ uuid: 18, name: 'Dr IQ', contact: 'contact 8', role: 8 },
-			{ uuid: 19, name: 'Magma', contact: 'contact 9', role: 9 },
-			{ uuid: 22, name: 'Tornado', contact: 'contact 10', role: 10 }
+			{ id: 11, name: 'Mr. Nice', contact: 'contact 1', role: 1},
+			{ id: 12, name: 'Narco', contact: 'contact 2', role: 2 },
+			{ id: 13, name: 'Bombasto', contact: 'contact 3', role: 3 },
+			{ id: 14, name: 'Celeritas', contact: 'contact 4', role: 4 },
+			{ id: 15, name: 'Magneta', contact: 'contact 5', role: 5 },
+			{ id: 16, name: 'RubberMan', contact: 'contact 6', role: 6 },
+			{ id: 17, name: 'Dynama', contact: 'contact 7', role: 7 },
+			{ id: 18, name: 'Dr IQ', contact: 'contact 8', role: 8 },
+			{ id: 19, name: 'Magma', contact: 'contact 9', role: 9 },
+			{ id: 22, name: 'Tornado', contact: 'contact 10', role: 10 }
 		];
 		return {staffs};
 	}
@@ -26,6 +26,6 @@ export class InMemoryDataService implements InMemoryDbService {
 	// if the staffs array is not empty, the method below returns the highest
 	// staff id + 1.
 	genId(staffs: Staff[]): number {
-		return staffs.length > 0 ? Math.max(...staffs.map(staff => staff.uuid)) + 1 : 11;
+		return staffs.length > 0 ? Math.max(...staffs.map(staff => staff.id)) + 1 : 11;
 	}
 }
