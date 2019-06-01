@@ -3,6 +3,8 @@ package com.jktw_emr.emr_server.model;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -61,11 +63,15 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    @NotNull
     private Date date;
     private String description;
     @ManyToOne
+    @NotNull
     private Patient patient;
+    @NotNull
     private String type;
-    @OneToMany(cascade={CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @OneToMany(cascade={CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
+    @NotNull
     private List<StaffMember> staff;
 }

@@ -11,14 +11,6 @@ import java.util.List;
 @Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Person {
 
-    public Name getName() {
-        return name;
-    }
-
-    public void setName(Name name) {
-        this.name = name;
-    }
-
     public List<Address> getAddresses() {
         return addresses;
     }
@@ -51,14 +43,43 @@ public abstract class Person {
         this.id = id;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PERSON_ID")
     private int id;
 
+    @JsonProperty("first-name")
     @NotNull
-    @Embedded
-    private Name name;
+    private String firstName;
+    @JsonProperty("middle-name")
+    private String middleName;
+    @JsonProperty("last-name")
+    @NotNull
+    private String lastName;
 
     @NotNull
     @ElementCollection

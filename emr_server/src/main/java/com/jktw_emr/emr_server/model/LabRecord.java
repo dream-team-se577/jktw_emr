@@ -3,6 +3,7 @@ package com.jktw_emr.emr_server.model;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -50,10 +51,13 @@ public class LabRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotNull
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date date;
     private String results;
     @ManyToOne
+    @NotNull
     private Patient patient;
+    @NotNull
     private String type;
 }
