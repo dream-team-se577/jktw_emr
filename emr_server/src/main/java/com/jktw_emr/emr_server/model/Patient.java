@@ -40,7 +40,9 @@ public class Patient extends Person {
 
     @JsonProperty("lab-records")
     @OneToMany(mappedBy = "patient")
+    @NotNull
     private List<LabRecord> labRecords;
     @OneToMany(mappedBy = "patient")
+    @NotNull
     private List<Appointment> appointments;
 }

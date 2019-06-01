@@ -1,6 +1,7 @@
 package com.jktw_emr.emr_server.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity(name="Staff")
 public class StaffMember extends Person {
@@ -13,5 +14,6 @@ public class StaffMember extends Person {
         this.role = role;
     }
 
+    @NotNull
     private String role;
 }

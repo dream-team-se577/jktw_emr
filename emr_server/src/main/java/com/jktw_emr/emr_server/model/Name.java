@@ -3,6 +3,7 @@ package com.jktw_emr.emr_server.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 
 @Embeddable
 public class Name {
@@ -31,9 +32,11 @@ public class Name {
     }
 
     @JsonProperty("first-name")
+    @NotNull
     private String firstName;
     @JsonProperty("middle-name")
     private String middleName;
     @JsonProperty("last-name")
+    @NotNull
     private String lastName;
 }

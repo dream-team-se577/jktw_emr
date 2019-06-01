@@ -3,6 +3,7 @@ package com.jktw_emr.emr_server.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 
 @Embeddable
 public class Address {
@@ -63,16 +64,21 @@ public class Address {
     }
 
     @JsonProperty("street-number")
+    @NotNull
     private String streetNumber;
     @JsonProperty("address-line-2")
     private String addressLine2;
     @JsonProperty("street-name")
+    @NotNull
     private String streetName;
     @JsonProperty("city-name")
+    @NotNull
     private String cityName;
     @JsonProperty("state-name")
+    @NotNull
     private String stateName;
     @JsonProperty("zip-code")
+    @NotNull
     private String zipCode;
     @JsonProperty("country-name")
     private String countryName;
