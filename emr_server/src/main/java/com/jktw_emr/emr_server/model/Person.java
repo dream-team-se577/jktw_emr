@@ -5,18 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Person {
-
-    public ContactInformation getContact() {
-        return contact;
-    }
-
-    public void setContact(ContactInformation contact) {
-        this.contact = contact;
-    }
 
     public Name getName() {
         return name;
@@ -24,6 +17,30 @@ public abstract class Person {
 
     public void setName(Name name) {
         this.name = name;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public List<PhoneNumber> getPhoneNumbers() {
+        return phoneNumbers;
+    }
+
+    public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
+    }
+
+    public List<EmailAddress> getEmailAddresses() {
+        return emailAddresses;
+    }
+
+    public void setEmailAddresses(List<EmailAddress> emailAddresses) {
+        this.emailAddresses = emailAddresses;
     }
 
     public int getId() {
@@ -37,14 +54,23 @@ public abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PERSON_ID")
-    @JsonProperty(value="person_id")
     private int id;
 
     @NotNull
     @Embedded
     private Name name;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference(value="contact-person")
-    private ContactInformation contact;
+    @NotNull
+    @ElementCollection
+    private List<Address> addresses;
+
+    @NotNull
+    @JsonProperty("phone-numbers")
+    @ElementCollection
+    private List<PhoneNumber> phoneNumbers;
+
+    @NotNull
+    @JsonProperty("email-addresses")
+    @ElementCollection
+    private List<EmailAddress> emailAddresses;
 }
