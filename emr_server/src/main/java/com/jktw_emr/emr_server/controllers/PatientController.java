@@ -27,7 +27,7 @@ public class PatientController {
         return patientService.findAll();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     Patient update(@RequestBody Patient patient)
     {
         return patientService.save(patient);

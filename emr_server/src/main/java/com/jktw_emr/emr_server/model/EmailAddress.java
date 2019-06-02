@@ -23,7 +23,6 @@ public class EmailAddress {
         this.domain = domain;
     }
 
-    @JsonProperty("local-part")
     @NotNull
     private String localPart;
     @NotNull

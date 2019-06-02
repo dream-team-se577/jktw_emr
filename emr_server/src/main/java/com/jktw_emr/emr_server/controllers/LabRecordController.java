@@ -35,7 +35,7 @@ public class LabRecordController {
         return labRecordService.findAll();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     LabRecord update(@RequestBody LabRecord labRecord)
     {
         return labRecordService.save(labRecord);

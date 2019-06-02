@@ -63,23 +63,16 @@ public class Address {
         this.zipCode = zipCode;
     }
 
-    @JsonProperty("street-number")
     @NotNull
     private String streetNumber;
-    @JsonProperty("address-line-2")
     private String addressLine2;
-    @JsonProperty("street-name")
     @NotNull
     private String streetName;
-    @JsonProperty("city-name")
     @NotNull
     private String cityName;
-    @JsonProperty("state-name")
     @NotNull
     private String stateName;
-    @JsonProperty("zip-code")
     @NotNull
     private String zipCode;
-    @JsonProperty("country-name")
     private String countryName;
 }

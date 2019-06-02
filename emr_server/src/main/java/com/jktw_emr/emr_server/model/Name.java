@@ -31,12 +31,9 @@ public class Name {
         this.lastName = lastName;
     }
 
-    @JsonProperty("first-name")
     @NotNull
     private String firstName;
-    @JsonProperty("middle-name")
     private String middleName;
-    @JsonProperty("last-name")
     @NotNull
     private String lastName;
 }
