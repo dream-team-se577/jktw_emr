@@ -9,6 +9,7 @@
       <th>Details</th>
       <th>Appointments</th>
       <th>Labs</th>
+      <th>Staffs</th>
       <th>New</th>
     </tr>
     <tr *ngFor="let patient of patients">
@@ -16,16 +17,16 @@
         {{patient.id}}
       </td>
       <td>
-        {{patient.first_name}}
+        {{patient.firstName}}
       </td>
       <td>
-        {{patient.middle_name}}
+        {{patient.middleName}}
       </td>
       <td>
-        {{patient.last_name}}
+        {{patient.lastName}}
       </td>
       <td class="text-right">
-        <a routerLink="/labDetail/{{patient.id}}"> View Details </a>
+        <a routerLink="/patientDetail/{{patient.id}}"> View Details </a>
       </td>
       <td class="text-right">
         <a routerLink="/appointmentsById/{{patient.id}}"> View Appointments </a>
