@@ -1,0 +1,46 @@
+<div class="container">
+  <table class="table table-bordered table-inverse">
+    <tr>
+      <th>Id</th>
+      <th>Date</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Patient-Id</th>
+      <th>Staff-Id</th>
+      <th>Details</th>
+      <th>Patient</th>
+      <th>Create</th>
+      <th>Delete</th>
+    </tr>
+    <tr *ngFor="let appointment of appointments">
+      <td>
+        {{appointment.id}}
+      </td>
+      <td>
+        {{appointment.date}}
+      </td>
+        {{appointment.type}}
+      <td>
+        {{appointment.description}}
+      </td>
+      <td>
+        {{appointment.patient}}
+      </td>
+      <td>
+
+      </td>
+      <td class="text-right">
+        <a routerLink="/appointmentDetail/{{appointment.id}}"> View Details </a>
+      </td>
+      <td class="text-right">
+        <a routerLink="/patientDetail/{{appointment.patient}}"> View Patient </a>
+      </td>
+      <td class="text-right">
+        <a routerLink="/appointmentDetail/{{appointment.patient}}"> New Appointment </a>
+      </td>
+      <td class="text-right">
+        <button title="delete appointment" (click)="delete(appointment)">X</button>
+      </td>
+    </tr>
+  </table>
+</div>

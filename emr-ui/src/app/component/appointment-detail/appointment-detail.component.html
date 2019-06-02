@@ -1,0 +1,21 @@
+<div class="container">
+  <form>
+    <!--div *ngIf="validMessage != ''">
+      <h3 class="has-info">{{validMessage}}</h3>
+    </div-->
+      <div>
+        <label>Date</label>
+        <div>{{appointment.date}}</div>
+      </div>
+      <div>
+        <label>Description</label>
+        <div>{{appointment.description}}</div>
+      </div>
+      <div>
+        <label>Type</label>
+        <div>{{appointment.type}}</div>
+      </div>
+    <button (click)="edit()">save</button>
+	  <button (click)="goBack()">go back</button>
+ </form>
+</div>
