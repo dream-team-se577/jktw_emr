@@ -38,7 +38,6 @@ public class PhoneNumber {
         return areaCode + "-" + prefix + "-" + lineNumber;
     }
 
-    @JsonProperty("area-code")
     @Size(min=3, max=3)
     @NotNull
     private String areaCode;
@@ -47,7 +46,6 @@ public class PhoneNumber {
     @NotNull
     private String prefix;
 
-    @JsonProperty("line-number")
     @Size(min=4, max=4)
     @NotNull
     private String lineNumber;

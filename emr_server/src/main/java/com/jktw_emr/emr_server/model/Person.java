@@ -71,12 +71,9 @@ public abstract class Person {
     @Column(name = "PERSON_ID")
     private int id;
 
-    @JsonProperty("first-name")
     @NotNull
     private String firstName;
-    @JsonProperty("middle-name")
     private String middleName;
-    @JsonProperty("last-name")
     @NotNull
     private String lastName;
 
@@ -85,12 +82,10 @@ public abstract class Person {
     private List<Address> addresses;
 
     @NotNull
-    @JsonProperty("phone-numbers")
     @ElementCollection
     private List<PhoneNumber> phoneNumbers;
 
     @NotNull
-    @JsonProperty("email-addresses")
     @ElementCollection
     private List<EmailAddress> emailAddresses;
 }

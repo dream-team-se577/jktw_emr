@@ -38,7 +38,6 @@ public class Patient extends Person {
     @Size(min = 9, max = 9)
     private String ssn;
 
-    @JsonProperty("lab-records")
     @OneToMany(mappedBy = "patient")
     @NotNull
     @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id", scope = LabRecord.class, resolver = EntityIdResolver.class)
