@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { PatientService } from '../../service/patient.service';
+import { Patient } from '../../model/patient';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
@@ -10,7 +11,7 @@ import { FormGroup, FormControl, Validators} from '@angular/forms';
   styleUrls: ['./patient-detail.component.css']
 })
 export class PatientDetailComponent implements OnInit {
-  public patient;
+  patient: Patient;
 
   constructor(private route: ActivatedRoute, private patientService: PatientService, private location: Location) { }
 
