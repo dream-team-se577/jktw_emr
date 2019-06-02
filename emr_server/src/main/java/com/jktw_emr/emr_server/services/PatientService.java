@@ -18,4 +18,9 @@ public interface PatientService extends CrudRepository<Patient, Integer> {
     List<Patient> findBySsn(@Param("ssn") String ssn);
     List<Patient> findByFirstName(@Param("firstName") String firstName);
     List<Patient> findByLastName(@Param("lastName") String lastName);
+    List<Patient> findByFirstNameAndLastName(@Param("firstName") String firstName, @Param("lastName") String lastName);
+    List<Patient> findByFirstNameAndMiddleNameAndLastName(
+            @Param("firstName") String firstName,
+            @Param("middleName") String middleName,
+            @Param("lastName") String lastName);
 }

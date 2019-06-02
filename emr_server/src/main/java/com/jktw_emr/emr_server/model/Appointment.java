@@ -68,10 +68,14 @@ public class Appointment {
     private String description;
     @ManyToOne
     @NotNull
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true) // otherwise first ref as POJO, others as id
     private Patient patient;
     @NotNull
     private String type;
     @OneToMany(cascade={CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
     @NotNull
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true) // otherwise first ref as POJO, others as id
     private List<StaffMember> staff;
 }

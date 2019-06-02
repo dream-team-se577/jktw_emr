@@ -17,4 +17,9 @@ public interface StaffService extends CrudRepository<StaffMember, Integer> {
     List<StaffMember> findByRole(@Param("role") String role);
     List<StaffMember> findByFirstName(@Param("firstName") String firstName);
     List<StaffMember> findByLastName(@Param("lastName") String lastName);
+    List<StaffMember> findByFirstNameAndLastName(@Param("firstName") String firstName, @Param("lastName") String lastName);
+    List<StaffMember> findByFirstNameAndMiddleNameAndLastName(
+            @Param("firstName") String firstName,
+            @Param("middleName") String middleName,
+            @Param("lastName") String lastName);
 }
