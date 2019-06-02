@@ -35,7 +35,7 @@ public class AppointmentController {
         return appointmentService.findAll();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     Appointment update(@RequestBody Appointment appointment)
     {
         return appointmentService.save(appointment);

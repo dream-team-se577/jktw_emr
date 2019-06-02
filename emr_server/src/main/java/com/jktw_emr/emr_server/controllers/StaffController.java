@@ -27,7 +27,7 @@ public class StaffController {
         return staffService.findAll();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     StaffMember update(@RequestBody StaffMember staffMember)
     {
         return staffService.save(staffMember);
