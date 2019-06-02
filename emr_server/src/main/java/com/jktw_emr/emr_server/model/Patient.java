@@ -41,12 +41,12 @@ public class Patient extends Person {
     @JsonProperty("lab-records")
     @OneToMany(mappedBy = "patient")
     @NotNull
-    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id", scope = LabRecord.class, resolver = EntityIdResolver.class)
     @JsonIdentityReference(alwaysAsId=true) // otherwise first ref as POJO, others as id
     private List<LabRecord> labRecords;
     @OneToMany(mappedBy = "patient")
     @NotNull
-    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id", scope = Appointment.class, resolver = EntityIdResolver.class)
     @JsonIdentityReference(alwaysAsId=true) // otherwise first ref as POJO, others as id
     private List<Appointment> appointments;
 }
