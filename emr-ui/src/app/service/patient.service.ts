@@ -40,14 +40,20 @@ export class PatientService {
     //);
   }
 
-  /** GET patient by id. Return `undefined` when id not found */
-  getPatientNo404<Data>(id: number): Observable<any> {
-    const url = `${this.patientsUrl}/?id=${id}`;
+  /** GET patient by id. Will 404 if id not found */
+  getAppointmentsByPatientId(id: number): Observable<any> {
+    const url = `${this.patientsUrl}/${id}` + '/appointments';
     return this.http.get(url);
-    //.pipe(map(patients => patients[0]), // returns a {0|1} element array
-    //tap(h => {const outcome = h ? `fetched` : `did not find`;
-    //this.log(`${outcome} patient id=${id}`);
-    //}),
+    //.pipe(tap(_ => this.log(`fetched patient id=${id}`)),
+    //catchError(this.handleError<Patient>(`getPatient id=${id}`))
+    //);
+  }
+
+  /** GET patient by id. Will 404 if id not found */
+  getLabsByPatientId(id: number): Observable<any> {
+    const url = `${this.patientsUrl}/${id}` + '/labRecords';
+    return this.http.get(url);
+    //.pipe(tap(_ => this.log(`fetched patient id=${id}`)),
     //catchError(this.handleError<Patient>(`getPatient id=${id}`))
     //);
   }

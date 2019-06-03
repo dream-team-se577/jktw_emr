@@ -40,14 +40,11 @@ export class LabService {
     //);
   }
 
-  /** GET lab by id. Return `undefined` when id not found */
-  getLabNo404<Data>(id: number): Observable<any> {
-    const url = `${this.labsUrl}/?id=${id}`;
+  /** GET lab by id. Will 404 if id not found */
+  getPatientByLabId(id: number): Observable<any> {
+    const url = `${this.labsUrl}/${id}` + '/patient';
     return this.http.get(url);
-    //.pipe(map(labs => labs[0]), // returns a {0|1} element array
-    //tap(h => {const outcome = h ? `fetched` : `did not find`;
-    //this.log(`${outcome} lab id=${id}`);
-    //}),
+    //.pipe(tap(_ => this.log(`fetched lab id=${id}`)),
     //catchError(this.handleError<Lab>(`getLab id=${id}`))
     //);
   }
