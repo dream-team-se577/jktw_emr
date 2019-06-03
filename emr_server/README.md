@@ -55,7 +55,8 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 POST http://localhost:8080/patients with body (MIME type application/json):  
   
-```{
+```
+{
 	"ssn": "123456789",
 	"firstName":"Doe",
 	"lastName": "Jurko",
@@ -64,11 +65,13 @@ POST http://localhost:8080/patients with body (MIME type application/json):
 	"phoneNumbers" : [],
 	"appointments" : [],
 	"labRecords" : []
-}```
+}
+```
 
 Should recieve back:
 
-```{
+```
+{
     "id": 1,
     "firstName": "Doe",
     "middleName": null,
@@ -79,13 +82,15 @@ Should recieve back:
     "ssn": "123456789",
     "labRecords": [],
     "appointments": []
-}```
+}
+```
 
 ### Editting a patient to add an address
 
 PUT http://localhost:8080/patients with body (MIME type application/json):
 
-```{
+```
+{
 	"id" : 1,
 	"ssn": "123456789",
 	"firstName":"Doe",
@@ -116,12 +121,14 @@ PUT http://localhost:8080/patients with body (MIME type application/json):
     ],
 	"appointments" : [],
 	"labRecords" : []
-}```
+}
+```
 
 
 Should receieve back:
 
-```{
+```
+{
     "id": 1,
     "firstName": "Doe",
     "middleName": null,
@@ -153,24 +160,28 @@ Should receieve back:
     "ssn": "123456789",
     "labRecords": [],
     "appointments": []
-}```
+}
+```
 
 ### Creating a staff member
 
 POST http://localhost:8080/staffMembers with body (MIME type application/json):
 
-```{  
+```
+{  
 	"firstName": "Michael",
 	"lastName" : "Johnson",
 	"addresses": [],
 	"emailAddresses" : [],
 	"phoneNumbers" : [],
 	"role" : "Doctor"
-}```
+}
+```
   
 Should receive back:
 
-```{
+```
+{
     "id": 2,
     "firstName": "Michael",
     "middleName": null,
@@ -179,13 +190,15 @@ Should receive back:
     "phoneNumbers": [],
     "emailAddresses": [],
     "role": "Doctor"
-}```
+}
+```
 
 ### Creating an appointment
 
 POST http://localhost:8080/appointments with body (MIME type application/json):
 
-```{
+```
+{
 	"date" : "2018-9-12 12:00",
 	"description" : "Regular check-up",
 	"type" : "Check up",
@@ -193,10 +206,12 @@ POST http://localhost:8080/appointments with body (MIME type application/json):
 		2
 	],
 	"patient" : 1
-}```
+}
+```
   
 Should return (patient 1 should have its "appointments" updated):
-```{
+```
+{
     "id": 1,
     "date": "2018-09-12 12:00",
     "description": "Regular check-up",
@@ -205,12 +220,14 @@ Should return (patient 1 should have its "appointments" updated):
     "staff": [
         2
     ]
-}```
+}
+```
 
 ### Changing the date of an appointment
 
 PUT http://localhost:8080/appointments with body (MIME type application/json):
-```{
+```
+{
     "id": 1,
     "date": "2019-09-12 12:00",
     "description": "Regular check-up",
@@ -219,10 +236,12 @@ PUT http://localhost:8080/appointments with body (MIME type application/json):
     "staff": [
         2
     ]
-}```
+}
+```
   
 Should receive back:
-```{
+```
+{
     "id": 1,
     "date": "2019-09-12 12:00",
     "description": "Regular check-up",
@@ -231,7 +250,8 @@ Should receive back:
     "staff": [
         2
     ]
-}```
+}
+```
 
 ### Adding a second staff member to the appointment
 
@@ -239,18 +259,21 @@ Should receive back:
 
 POST http://localhost:8080/staffMembers with body (MIME type application/json):
 
-```{
+```
+{
 	"firstName": "Mehmet",
 	"lastName" : "Oz",
 	"addresses": [],
 	"emailAddresses" : [],
 	"phoneNumbers" : [],
 	"role" : "Doctor"
-}```
+}
+```
 
 Should receive back:
 
-```{
+```
+{
     "id": 3,
     "firstName": "Mehmet",
     "middleName": null,
@@ -259,13 +282,15 @@ Should receive back:
     "phoneNumbers": [],
     "emailAddresses": [],
     "role": "Doctor"
-}```
+}
+```
 
 
 #### Next, edit the appointment
 
 PUT http://localhost:8080/appointments with body (MIME type application/json):  
-```{
+```
+{
     "id": 1,
     "date": "2019-09-12 12:00",
     "description": "Regular check-up",
@@ -275,10 +300,12 @@ PUT http://localhost:8080/appointments with body (MIME type application/json):
         2,
         3
     ]
-}```  
+}
+```  
 
 Should recieve back (patient perserved its "appoointments" property):  
-```{
+```
+{
     "id": 1,
     "date": "2019-09-12 12:00",
     "description": "Regular check-up",
@@ -288,7 +315,8 @@ Should recieve back (patient perserved its "appoointments" property):
         2,
         3
     ]
-}```
+}
+```
 
 ### To cancel an appointment
 
@@ -301,21 +329,25 @@ Staff members are not deleted; patients is not deleted (but patient's "appointme
 ### To create a lab record of an existing patient
 
 POST http://localhost:8080/labRecords with body (MIME type application/json):
-```{
+```
+{
 	"date" : "2017-12-31 12:00",
 	"results" : "Was fine...",
 	"type" : "MRI",
 	"patient" : 1
-}```
+}
+```
 
 Should recieve back (patient's "labRecords" updated):
-```{
+```
+{
     "id": 1,
     "date": "2017-12-31 12:00",
     "results": "Was fine...",
     "patient": 1,
     "type": "MRI"
-}```
+}
+```
 
 ## Search Functionality
 
