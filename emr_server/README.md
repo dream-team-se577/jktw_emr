@@ -316,3 +316,36 @@ Should recieve back (patient's "labRecords" updated):
     "patient": 1,
     "type": "MRI"
 }`
+
+## Search Functionality
+
+There are a few different search endpoints that can be used in each of the services.  These can be accessed by adding "/search/<queryName>?<param>=<value>&..." to the end of the address.
+	Objects can be specified using their id's
+
+### Patient
+
+findBySsn(ssn);
+findByFirstName(firstName);
+findByLastName(lastName);
+findByFirstNameAndLastName(firstName, lastName);
+findByFirstNameAndMiddleNameAndLastName(firstName, middleName, lastName);
+
+### Staff Members
+
+findByRole(role);
+findByFirstName(firstName);
+findByLastName(lastName);
+findByFirstNameAndLastName(firstName, lastName);
+findByFirstNameAndMiddleNameAndLastName(firstName, middleName, lastName);
+
+### Lab Records
+
+findByDateBetween(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") startDate, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") endDate);
+
+findByPatient(patient);
+
+### Appointments
+
+findByDateBetween(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") startDate, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") endDate);
+
+findByPatient(patient);
