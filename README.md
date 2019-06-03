@@ -25,8 +25,7 @@ The users for this system are the Staff Members at JKTW Medical Center.  This in
 
 | User  | Feature Name | Description |
 | ------------- | ------------- | ------------- |
-| Staff Member  | Dashboard  | As a staff member, I would like to navigate the dashboard Register patient, retrieve patient  create appointments and schedule follow-up
- |
+| Staff Member  | Dashboard  | As a staff member, I would like to navigate the dashboard Register patient, retrieve patient  create appointments and schedule follow-up|
 | Staff Member  | Retrieve Staff Information  | As a hospital administrator, I would like to  delete accounts for doctors, nurses and clerical staff. |
 | Staff Member  | Update Staff Information  | As a staff member, I would like to update staff information in case contact information needs updated or the staff member switches roles. |
 | Staff Member  | Register Patient  | As a staff member, I would like to register a patient into the system when they visit for the first time including their name, social security number, medical history and contact information. |
