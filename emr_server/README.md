@@ -4,14 +4,14 @@ Software Project for SE577:  Software Architecture
 ## How it's made
 
 This code was built in the following steps:
-1.)  Using the Spring Boot Initializer (https://start.spring.io/), using the following dependencies:  Web, JPA, mySQL.
-- Also manually add the jaxb-api maven library
-2.)  The database was created by installing MySQL's community server (https://dev.mysql.com/downloads/windows/installer/8.0.html)
-- For more information see "Starting the database", below
-3.)  The rest of the code was created using IntelliJ to build (https://www.jetbrains.com/idea/download/#section=windows)
-4.)  For testing without the client, Postman (https://www.getpostman.com/) to perform actions against the REST API
+1. Using the Spring Boot Initializer (https://start.spring.io/), using the following dependencies:  Web, JPA, mySQL.
+    - Also manually add the jaxb-api maven library
+2. The database was created by installing MySQL's community server (https://dev.mysql.com/downloads/windows/installer/8.0.html)
+    - For more information see "Starting the database", below
+3. The rest of the code was created using IntelliJ to build (https://www.jetbrains.com/idea/download/#section=windows)
+4. For testing without the client, Postman (https://www.getpostman.com/) to perform actions against the REST API
 
-For more information, see the HELP.md in this same directory.
+For more information on how to create projects with these, see the HELP.md in this same directory.
 
 ## Starting the database:
 
@@ -52,14 +52,14 @@ SET FOREIGN_KEY_CHECKS = 1;
 ## To Build and Run Without IntelliJ
 
 If you do not have an IDE to build this (or if you don't care about debugging), follow these steps [on UNIX systems, replaced "mvnw.cmd" with "mvnw"]:
-1.) Navigate to the emr_server/ directory (the directory this README is in)
-2.) Run:  `mvnw.cmd clean`
-3.) Run:  `mvnw.cmd validate`
-4.) Run:  `mvnw.cmd compile`
-5.) Run:  `mvnw.cmd package`
-6.) This should build the project into the `target` directory, navigate to there
-7.) Run the .jar file using `java -jar emr_server-0.0.1-SNAPSHOT.jar`
-8.) From here, you can run the emr_ui or use Postman (https://www.getpostman.com/) to test
+1. Navigate to the emr_server/ directory (the directory this README is in)
+2. Run:  `mvnw.cmd clean`
+3. Run:  `mvnw.cmd validate`
+4. Run:  `mvnw.cmd compile`
+5. Run:  `mvnw.cmd package`
+6. This should build the project into the `target` directory, navigate to there
+7. Run the .jar file using `java -jar emr_server-0.0.1-SNAPSHOT.jar`
+8. From here, you can run the emr_ui or use Postman (https://www.getpostman.com/) to test
 
 ## Example Usage
 
@@ -384,12 +384,16 @@ findByFirstNameAndMiddleNameAndLastName(firstName, middleName, lastName);
 
 ### Lab Records
 
-findByDateBetween(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") startDate, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") endDate);  
+findByDateBetween(  
+&nbsp;&nbsp;&nbsp;&nbsp;@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") startDate,  
+&nbsp;&nbsp;&nbsp;&nbsp;@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") endDate);  
   
 findByPatient(patient);  
   
 ### Appointments
 
-findByDateBetween(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") startDate, @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") endDate);  
+findByDateBetween(  
+&nbsp;&nbsp;&nbsp;&nbsp;@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") startDate,  
+&nbsp;&nbsp;&nbsp;&nbsp;@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") endDate);  
   
 findByPatient(patient);  
