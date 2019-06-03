@@ -8,7 +8,6 @@
       <th>Last-Name</th>
       <th>Details</th>
       <th>Appointments</th>
-      <th>Labs</th>
       <th>New</th>
     </tr>
     <tr *ngFor="let staff of staffs">
@@ -31,10 +30,7 @@
         <a routerLink="/staffDetail/{{staff.id}}"> View Details </a>
       </td>
       <td class="text-right">
-        <a routerLink="/appointmentsById/{{staff.id}}"> Appointments staffed </a>
-      </td>
-      <td class="text-right">
-        <a routerLink="/labsById/{{staff.id}}"> Labs staffed </a>
+        <a routerLink="/appointmentsById/{{staff.id}}"> View Appointments </a>
       </td>
       <td class="text-right">
         <a routerLink="/labDetail/{{staff.id}}"> New Staff </a>

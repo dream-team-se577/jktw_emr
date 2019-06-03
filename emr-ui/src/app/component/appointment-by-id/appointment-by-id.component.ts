@@ -7,10 +7,13 @@ import { AppointmentService } from '../../service/appointment.service';
   styleUrls: ['./appointment-by-id.component.css']
 })
 export class AppointmentByIdComponent implements OnInit {
+  public appointments;
 
-  constructor() { }
+  constructor(private appointmentService: AppointmentService) { }
 
-  ngOnInit() {
-  }
+    constructor() { }
+
+    ngOnInit() {
+    }
 
 }

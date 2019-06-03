@@ -9,6 +9,7 @@
       <th>Staff-Id</th>
       <th>Details</th>
       <th>Patient</th>
+      <th>Staff</th>
       <th>Create</th>
       <th>Delete</th>
     </tr>
@@ -34,6 +35,9 @@
       </td>
       <td class="text-right">
         <a routerLink="/patientDetail/{{appointment.patient}}"> View Patient </a>
+      </td>
+      <td class="text-right">
+        <a routerLink="/patientDetail/{{appointment.patient}}"> View Staff </a>
       </td>
       <td class="text-right">
         <a routerLink="/appointmentDetail/{{appointment.patient}}"> New Appointment </a>

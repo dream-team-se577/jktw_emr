@@ -45,6 +45,26 @@ export class AppointmentService {
     //);
   }
 
+  /** GET appointment by id. Will 404 if id not found */
+  getStaffsByAppointmentId(id: number) {
+    //return this.http.get('server/Appointments' + id);
+    const url = `${this.appointmentsUrl}/${id}` + '/staff';
+    return this.http.get(url);
+    //.pipe(tap(_ => this.log(`fetched appointment id=${id}`)),
+    //catchError(this.handleError<Appointment>(`getAppointment id=${id}`))
+    //);
+  }
+
+  /** GET appointment by id. Will 404 if id not found */
+  getPatientsByAppointmentId(id: number) {
+    //return this.http.get('server/Appointments' + id);
+    const url = `${this.appointmentsUrl}/${id}`+ '/patient';
+    return this.http.get(url);
+    //.pipe(tap(_ => this.log(`fetched appointment id=${id}`)),
+    //catchError(this.handleError<Appointment>(`getAppointment id=${id}`))
+    //);
+  }
+
   /** PUT: update the appointment on the server */
   updateAppointment (appointment: Appointment) {
     //let body = JSON.stringify(appointment);
