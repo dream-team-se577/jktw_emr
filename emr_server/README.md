@@ -49,6 +49,18 @@ DROP TABLE IF EXISTS staff;
 SET FOREIGN_KEY_CHECKS = 1;
 ```  
 
+## To Build and Run Without IntelliJ
+
+If you do not have an IDE to build this (or if you don't care about debugging), follow these steps [on UNIX systems, replaced "mvnw.cmd" with "mvnw"]:
+1.) Navigate to the emr_server/ directory (the directory this README is in)
+2.) Run:  `mvnw.cmd clean`
+3.) Run:  `mvnw.cmd validate`
+4.) Run:  `mvnw.cmd compile`
+5.) Run:  `mvnw.cmd package`
+6.) This should build the project into the `target` directory, navigate to there
+7.) Run the .jar file using `java -jar emr_server-0.0.1-SNAPSHOT.jar`
+8.) From here, you can run the emr_ui or use Postman (https://www.getpostman.com/) to test
+
 ## Example Usage
 
 ### Making a patient
