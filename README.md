@@ -3,51 +3,40 @@ Software Project for SE577:  Software Architecture
 
 ## About this Repository
 
-Our society is becoming more and more health conscious, people are living longer - often past their 70’s.  Science can do amazing things to preserve and extend life through new cures to previously untreatable ailments and diseases. Therefore, the health industry is a huge and growing market with hospitals and health centers being built frequently to meet the needs of an ever-growing market.  Our customer, JKTW Health Center, is one of these establishments.  Due to ever-increasing demands, they have exceeded the capability to efficiently run their establishment.  Records are poorly secured, processes are typically manual, and their Electronic Medical Record (EMR) system is based on several fragmented systems.
+This repository is for the final project for SE577:  Software Architecture at Drexel University.  It puts to use many different design patterns to implement a Electronic Medical Record (EMR) system.
 
-We aim to improve the way staff at JKTW Health Center handle and view their customers’ records through a comprehensive and expandable software system.  In this way, we hope to lower clerical errors and bolster the customer experience when choosing their health provider.
+For more information on how to build the server, see emr_server/README.md.
 
-This repository is for a system that will accept logins from hospital staff and allow them to edit and view patient records.
+For more information on the architecture, see READEME.pdf.
 
 ## Mission
 
-Develop a comprehensive secure electronic medical record system with a user-friendly interface for doctors, nurses and clerical staff at JKTW medical center.
+Our mission is to provide better technological solutions for the people working in healthcare by allowing for simpler data retrieval.
 
 ## Problem
 
-Patient records are not properly secured in the current Electronic Medical Record (EMR) system - every member of staff in the existing system has access to the same patient information and can edit them willingly.  Due to the loose restrictions on patient record entry, the hospital staff consistently has to correct record errors associated with manual client data entry.  Furthermore, searching for records based off patient information requires an unreasonable amount of searching through scanned PDF files. Simple tasks such as finding the phone number of a patient who needs a follow-up consultation can take sometimes hours.  There’s also an issue where reporting and auditing takes whole weeks to find the correct scanned forms for certain patients.
+JKTW Medical Center is having trouble storing and retrieving their medical records for patients and their appointments.  Patient records are not properly secured in the current Electronic Medical Record system (EMR/EMS).  Due to the loose restrictions on patient record entry, the hospital staff consistently has to correct record errors associated with manual client data entry.  Furthermore, records are stored in unparsable scanned PDF’s organized in directories on a central server.  Because of this, searching for records based off patient information requires an unreasonable amount of searching through the scanned PDF files. Simple tasks such as finding the phone number of a patient who needs a follow-up consultation can take sometimes hours and the scheduling is similarly hectic as the schedule is maintained by an employee who updates an Excel spreadsheet weekly.  There’s also an issue where reporting and auditing takes whole weeks to find the correct scanned forms for certain patients.
 
 ## Users
 
-The users of this system are broken down into two groups:
-Hospital Administrator - The person who manages the EMS system including user logins and permissions.
-Medical Staff - JKTW employees who interact with patient records (also referred to as “hospital employees”)
-
-The medical staff can be broken down further into:
-Doctors
-Nurses
-Clerical Staff
+The users for this system are the Staff Members at JKTW Medical Center.  This includes the doctors, nurses, clerical staff and hospital administrators.  These employees require interacting with patient records including their appointments with doctors and nurses.  Note that the patient is presumed to not have access to this system.
 
 ## Features
 
 | User  | Feature Name | Description |
 | ------------- | ------------- | ------------- |
-| Hospital Admin  | Create Account(s)  | As a hospital administrator, I would like to create accounts for doctors, nurses and clerical staff. |
-| Hospital Admin  | Delete Account(s)  | As a hospital administrator, I would like to  delete accounts for doctors, nurses and clerical staff. |
-| Hospital Admin  | Edit Account(s)  | As a hospital administrator, I would like to edit account information for doctors, nurses and clerical staff  such as name, contact information, role, permissions, password resets |
-| Hospital Admin  | Retrieve Account(s)  | As a hospital administrator, i would like to retrieve accounts for doctors, nurses and clerical staff currently in the system |
-| Medical Staff  | Login Portal  | As a hospital employee, I would like to be able to log into the EMS Dashboard |
-| Medical Staff  | Dashboard  | As a member of the medical staff, I would like to navigate the dashboard and search for patient(s) |
-| Clerical Staff  | Dashboard  | As a member of clerical staff, I would like to navigate the dashboard Register patient, retrieve patient  create appointments and schedule follow-up |
-| Clerical Staff  | Register Patient  | As a member of clerical staff, I would like to register a patient into the system when they visit for the first time including their demographic, medical history and contact information. |
-| Medical Staff  | Medical Record Retrieval  | As a hospital employee, I would like to use a patient’s social security number to retrieve their information such as lab/diagnostic records, referrals, personal health record, and visit summary. |
-| Clerical Staff  | Update Contact Information  | As a member of clerical staff, I would like the ability to update existing contact information and demographic information on a patient. |
-| Doctors/Nurses  | Update Medical Information   | As a doctor/nurse, I would like to update the medical information of a patient including their prescriptions, diagnoses, and recommendation for lab tests. |
-| Clerical Staff  | Attach Document Feature  | As a member of clerical staff, I would like to attach scanned paper-based documents to a patient’s file. |
-| Medical Staff  | Search Medical Record  | As a hospital employee, I would like to search for medical records of employees based off contact information and previous visits. |
+| Staff Member  | Dashboard  | As a staff member, I would like to navigate the dashboard Register patient, retrieve patient  create appointments and schedule follow-up
+ |
+| Staff Member  | Retrieve Staff Information  | As a hospital administrator, I would like to  delete accounts for doctors, nurses and clerical staff. |
+| Staff Member  | Update Staff Information  | As a staff member, I would like to update staff information in case contact information needs updated or the staff member switches roles. |
+| Staff Member  | Register Patient  | As a staff member, I would like to register a patient into the system when they visit for the first time including their name, social security number, medical history and contact information. |
+| Staff Member  | Medical Record Retrieval  | As a staff member, I would like to use a patient’s social security number or name to retrieve their information such as lab/diagnostic records, appointment history, and contact information. |
+| Staff Member  | Update Contact Information  | As a staff member, I would like the ability to update existing contact information on a patient. |
+| Staff Member  | Update Medical Information  | As a staff member, I would like to update the medical information of a patient including their appointments and lab tests. |
+| Staff Member  | Search Appointments and Lab Records  | As a staff member, I would like to search for medical records of patients including a date range of appointments and lab records. |
 
  
-These features will remedy the problems plaguing the current system(s) utilized by JKTW staff.  In addition, being able to create accounts via a hospital administrator will assure that only the employees of JKTW have encrypted logins that facilitate viewing and updating patient records.  Furthermore, the system supports roles and permissions, with roles such as “doctor”, “nurse” and “clerical staff” so that only specific roles have permissions to edit,  read and access certain patient information.  The search functions will allow for easy recall on patients who have visited previously so that medical staff can view health and contact information.  Finally, allowing scanned documents to appear on patient records will also provide a paper trail for auditing and quality control.
+These features will remedy the problems plaguing the current system(s) utilized by JKTW staff.  Record retrieval can be achieved based off a number of fields such as name and SSN.  They can also schedule appointments and lab visits easier by using queries to search within a date range.  The search functions will allow for easy recall on patients who have visited previously so that medical staff can view health and contact information.
 
 For more information on design decisions and use cases, read attached README.pdf.
 
