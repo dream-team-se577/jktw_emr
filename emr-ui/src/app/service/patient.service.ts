@@ -16,8 +16,11 @@ export class PatientService {
   constructor(private http: HttpClient) { }
 
   /** POST: add a new patient to the server */
-  addPatient (patient: Patient): Observable<any> {
-    return this.http.post(this.patientsUrl, patient, httpOptions);
+  addPatient (patient) {
+    patient.appointments = [];
+    patient.labRecords = [];
+    let body = JSON.stringify(patient);
+    return this.http.post(this.patientsUrl, body, httpOptions);
     //.pipe(tap((newPatient: Patient) => this.log(`added patient w/ id=${newPatient.id}`)),
     //catchError(this.handleError<Patient>('addPatient'))
     //);
@@ -32,7 +35,7 @@ export class PatientService {
   }
 
   /** GET patient by id. Will 404 if id not found */
-  getPatient(id: number): Observable<any> {
+  getPatient(id: number) {
     const url = `${this.patientsUrl}/${id}`;
     return this.http.get(url);
     //.pipe(tap(_ => this.log(`fetched patient id=${id}`)),
@@ -41,7 +44,7 @@ export class PatientService {
   }
 
   /** GET patient by id. Will 404 if id not found */
-  getAppointmentsByPatientId(id: number): Observable<any> {
+  getAppointmentsByPatientId(id: number) {
     const url = `${this.patientsUrl}/${id}` + '/appointments';
     return this.http.get(url);
     //.pipe(tap(_ => this.log(`fetched patient id=${id}`)),
@@ -50,7 +53,7 @@ export class PatientService {
   }
 
   /** GET patient by id. Will 404 if id not found */
-  getLabsByPatientId(id: number): Observable<any> {
+  getLabsByPatientId(id: number) {
     const url = `${this.patientsUrl}/${id}` + '/labRecords';
     return this.http.get(url);
     //.pipe(tap(_ => this.log(`fetched patient id=${id}`)),
@@ -59,7 +62,7 @@ export class PatientService {
   }
 
   /** PUT: update the patient on the server */
-  updatePatient (patient: Patient): Observable<any> {
+  updatePatient (patient) {
     return this.http.put(this.patientsUrl, patient, httpOptions);
     //.pipe(tap(_ => this.log(`updated patient id=${patient.id}`)),
     //catchError(this.handleError<any>('updatePatient'))
@@ -67,7 +70,7 @@ export class PatientService {
   }
 
   /** DELETE: delete the patient from the server */
- 	deletePatient (patient: Patient | number): Observable<any> {
+ 	deletePatient (patient: Patient | number) {
  		const id = typeof patient === 'number' ? patient : patient.id;
  		const url = `${this.patientsUrl}/${id}`;
 
