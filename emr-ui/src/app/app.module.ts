@@ -19,6 +19,9 @@ import { LabDetailComponent } from './component/lab-detail/lab-detail.component'
 import { AppointmentDetailComponent } from './component/appointment-detail/appointment-detail.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { StaffCreateComponent } from './component/staff-create/staff-create.component';
+import { PatientCreateComponent } from './component/patient-create/patient-create.component';
+import { LabCreateComponent } from './component/lab-create/lab-create.component';
+import { AppointmentCreateComponent } from './component/appointment-create/appointment-create.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { StaffCreateComponent } from './component/staff-create/staff-create.comp
     LabDetailComponent,
     AppointmentDetailComponent,
     DashboardComponent,
-    StaffCreateComponent
+    StaffCreateComponent,
+    PatientCreateComponent,
+    LabCreateComponent,
+    AppointmentCreateComponent
   ],
   imports: [
     BrowserModule,
