@@ -16,7 +16,7 @@ export class LabService {
   constructor(private http: HttpClient) { }
 
   /** POST: add a new lab to the server */
-  addLab (lab) {
+  addLab (lab: Lab): Observable<any> {
     return this.http.post(this.labsUrl, lab, httpOptions);
     //.pipe(tap((newLab: Lab) => this.log(`added lab w/ id=${newLab.id}`)),
     //catchError(this.handleError<Lab>('addLab'))
@@ -32,7 +32,7 @@ export class LabService {
   }
 
   /** GET lab by id. Will 404 if id not found */
-  getLab(id: number) {
+  getLab(id: number): Observable<any> {
     const url = `${this.labsUrl}/${id}`;
     return this.http.get(url);
     //.pipe(tap(_ => this.log(`fetched lab id=${id}`)),
@@ -41,7 +41,7 @@ export class LabService {
   }
 
   /** GET lab by id. Will 404 if id not found */
-  getPatientByLabId(id: number) {
+  getPatientByLabId(id: number): Observable<any> {
     const url = `${this.labsUrl}/${id}` + '/patient';
     return this.http.get(url);
     //.pipe(tap(_ => this.log(`fetched lab id=${id}`)),
@@ -50,7 +50,7 @@ export class LabService {
   }
 
   /** PUT: update the lab on the server */
-  updateLab (lab: Lab) {
+  updateLab (lab: Lab): Observable<any> {
     return this.http.put(this.labsUrl, lab, httpOptions);
     //.pipe(tap(_ => this.log(`updated lab id=${lab.id}`)),
     //catchError(this.handleError<any>('updateLab'))
@@ -58,7 +58,7 @@ export class LabService {
   }
 
   /** DELETE: delete the lab from the server */
- 	deleteLab (lab: Lab | number) {
+ 	deleteLab (lab: Lab | number): Observable<any> {
  		const id = typeof lab === 'number' ? lab : lab.id;
  		const url = `${this.labsUrl}/${id}`;
 

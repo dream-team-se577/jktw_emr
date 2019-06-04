@@ -40,7 +40,7 @@
         <a routerLink="/patientDetail/{{appointment.patient}}"> View Staff </a>
       </td>
       <td class="text-right">
-        <a routerLink="/appointmentCreate"> New Appointment </a>
+        <a routerLink="/appointmentDetail/{{appointment.patient}}"> New Appointment </a>
       </td>
       <td class="text-right">
         <button title="delete appointment" (click)="delete(appointment)">X</button>
