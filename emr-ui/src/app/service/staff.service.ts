@@ -11,15 +11,16 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class StaffService {
-  private staffsUrl = 'server/patients';
+  private staffsUrl = 'server/staffMembers';
 
   constructor(private http: HttpClient) { }
 
   /** POST: add a new staff to the server */
-  addStaff (staff: Staff) {
-    //let body = JSON.stringify(staff);
-    //return this.http.post('server/patients', body, httpOptions);
-    return this.http.post(this.staffsUrl, staff, httpOptions);
+  addStaff (staff) {
+    let body = JSON.stringify(staff);
+    console.log(body);
+    return this.http.post(this.staffsUrl, body, httpOptions);
+    //return this.http.post(this.staffsUrl, staff, httpOptions);
     //.pipe(tap((newStaff: Staff) => this.log(`added staff w/ id=${newStaff.id}`)),
     //catchError(this.handleError<Staff>('addStaff'))
     //);
@@ -45,7 +46,7 @@ export class StaffService {
   }
 
   /** PUT: update the staff on the server */
-  updateStaff (staff: Staff) {
+  updateStaff (staff) {
     //let body = JSON.stringify(staff);
     //return this.http.put('server/patients', body, httpOptions);
     return this.http.put(this.staffsUrl, staff, httpOptions);

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { StaffService } from '../../service/staff.service';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { FormsModule, FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-staff-detail',

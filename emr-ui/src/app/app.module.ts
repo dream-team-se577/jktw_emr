@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppointmentService } from './service/appointment.service';
@@ -18,10 +18,7 @@ import { StaffDetailComponent } from './component/staff-detail/staff-detail.comp
 import { LabDetailComponent } from './component/lab-detail/lab-detail.component';
 import { AppointmentDetailComponent } from './component/appointment-detail/appointment-detail.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
-import { AppointmentByIdComponent } from './component/appointment-by-id/appointment-by-id.component';
-import { StaffByIdComponent } from './component/staff-by-id/staff-by-id.component';
-import { PatientByIdComponent } from './component/patient-by-id/patient-by-id.component';
-import { LabByIdComponent } from './component/lab-by-id/lab-by-id.component';
+import { StaffCreateComponent } from './component/staff-create/staff-create.component';
 
 @NgModule({
   declarations: [
@@ -35,15 +32,14 @@ import { LabByIdComponent } from './component/lab-by-id/lab-by-id.component';
     LabDetailComponent,
     AppointmentDetailComponent,
     DashboardComponent,
-    AppointmentByIdComponent,
-    StaffByIdComponent,
-    PatientByIdComponent,
-    LabByIdComponent
+    StaffCreateComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [AppointmentService,LabService,PatientService,StaffService],
   bootstrap: [AppComponent]
