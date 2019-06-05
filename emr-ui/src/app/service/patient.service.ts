@@ -16,9 +16,7 @@ export class PatientService {
   constructor(private http: HttpClient) { }
 
   /** POST: add a new patient to the server */
-  addPatient (patient) {
-    patient.appointments = [];
-    patient.labRecords = [];
+  addPatient (patient: Patient) {
     let body = JSON.stringify(patient);
     return this.http.post(this.patientsUrl, body, httpOptions);
     //.pipe(tap((newPatient: Patient) => this.log(`added patient w/ id=${newPatient.id}`)),
@@ -62,8 +60,9 @@ export class PatientService {
   }
 
   /** PUT: update the patient on the server */
-  updatePatient (patient) {
-    return this.http.put(this.patientsUrl, patient, httpOptions);
+  updatePatient (patient: Patient) {
+    let body = JSON.stringify(patient);
+    return this.http.put(this.patientsUrl, body, httpOptions);
     //.pipe(tap(_ => this.log(`updated patient id=${patient.id}`)),
     //catchError(this.handleError<any>('updatePatient'))
     //);
