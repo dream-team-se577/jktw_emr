@@ -19,6 +19,10 @@ import { LabDetailComponent } from './component/lab-detail/lab-detail.component'
 import { AppointmentDetailComponent } from './component/appointment-detail/appointment-detail.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { StaffCreateComponent } from './component/staff-create/staff-create.component';
+import { AddressFormSubComponent } from './component/address/address.subcomponent';
+import { EmailFormSubComponent } from './component/email/email.subcomponent';
+import { PhoneFormSubComponent } from './component/phone/phone.subcomponent';
+import { PatientFormComponent } from './component/patient-form/patient-form.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { StaffCreateComponent } from './component/staff-create/staff-create.comp
     LabDetailComponent,
     AppointmentDetailComponent,
     DashboardComponent,
-    StaffCreateComponent
+    StaffCreateComponent,
+    AddressFormSubComponent,
+    EmailFormSubComponent,
+    PhoneFormSubComponent,
+    PatientFormComponent
   ],
   imports: [
     BrowserModule,

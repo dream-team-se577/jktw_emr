@@ -2,7 +2,7 @@ export class Appointment {
 	id: number;
 	date: string;
 	description: string;
-	patient: any;
+	patient: number;
 	type: string;
-	staff: any;
+	staff: number[];
 }

@@ -27,7 +27,9 @@ export class StaffCreateComponent implements OnInit {
       middleName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required),
-      test: new FormControl(),
+      addresses: new FormControl(),
+      emailAddresses: new FormControl(),
+      phoneNumbers: new FormControl(),
     });
   }
 
