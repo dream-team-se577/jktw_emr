@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { PatientService } from '../../service/patient.service';
 import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
@@ -12,7 +12,7 @@ import { Email } from '../../model/email';
   templateUrl: './patient-form.component.html',
   styleUrls: ['./patient-form.component.css']
 })
-export class PatientFormComponent implements OnInit {
+export class PatientFormComponent implements OnInit, OnChanges {
   patientForm: FormGroup;
   validMessage: string = "";
   lock : boolean = true;
@@ -24,12 +24,15 @@ export class PatientFormComponent implements OnInit {
   ngOnInit() {
     if (this.patient)
     {
+      this.lock = true;
+      let match = /^(\d{3})(\d{2})(\d{4})$/.exec(this.patient.ssn);
+      let newSsn = match[1] + "-" + match[2] + "-" + match[3];
       let existingPatient = this.fb.group({
         id : new FormControl(this.patient.id),
         firstName: new FormControl(this.patient.firstName, Validators.required),
         middleName: new FormControl(this.patient.middleName),
         lastName: new FormControl(this.patient.lastName, Validators.required),
-        ssn: new FormControl(this.patient.ssn || 'XXX-XX-XXXX', [Validators.required, Validators.pattern(/^\d{3}\-\d{2}\-\d{4}$/)]),
+        ssn: new FormControl(newSsn, [Validators.required, Validators.pattern(/^\d{3}\-\d{2}\-\d{4}$/)]),
         addresses: this.fb.array([]),
         phoneNumbers: this.fb.array([]),
         emailAddresses: this.fb.array([])
@@ -37,17 +40,23 @@ export class PatientFormComponent implements OnInit {
 
       const addressControl = <FormArray>existingPatient.controls['addresses'];
       this.patient.addresses.forEach(item => {
-          addressControl.push(item.toFormGroup(this.fb));
+          let address = new Address();
+          address.fromJson(item);
+          addressControl.push(address.toFormGroup(this.fb));
       });
 
       const emailControl = <FormArray>existingPatient.controls['emailAddresses'];
       this.patient.emailAddresses.forEach(item => {
-          emailControl.push(item.toFormGroup(this.fb));
+          let email = new Email();
+          email.fromJson(item);
+          emailControl.push(email.toFormGroup(this.fb));
       });
 
       const phoneControl = <FormArray>existingPatient.controls['phoneNumbers'];
       this.patient.phoneNumbers.forEach(item => {
-          phoneControl.push(item.toFormGroup(this.fb));
+          let phone = new Phone();
+          phone.fromJson(item);
+          phoneControl.push(phone.toFormGroup(this.fb));
       });
 
       this.patientForm = existingPatient;
@@ -68,6 +77,10 @@ export class PatientFormComponent implements OnInit {
 
       this.patientForm = newForm;
     }
+  }
+
+  ngOnChanges() {
+    this.ngOnInit();
   }
 
   addAddress(): void {
@@ -136,8 +149,12 @@ export class PatientFormComponent implements OnInit {
         patient.emailAddresses.push(email);
       }
 
-      patient.appointments = newPatient ? [] : patientFormInfo['appointments'];
-      patient.labRecords = newPatient ? [] : patientFormInfo['labRecords'];
+      patient.appointments = newPatient ? [] : this.patient.appointments;
+      patient.labRecords = newPatient ? [] : this.patient.labRecords;
+      if (!newPatient)
+      {
+        patient.id = this.patient.id;
+      }
 
       let action = newPatient ? this.patientService.addPatient(patient) :
                                 this.patientService.updatePatient(patient);

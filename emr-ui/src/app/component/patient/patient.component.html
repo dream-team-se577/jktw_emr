@@ -3,7 +3,7 @@
   <button pButton label="Register" (click)="patientDetail=true" [hidden]="patientDetail">Register</button>
   <button pButton label="Hide" (click)="patientDetail=false" [hidden]="!patientDetail">Hide</button>
   <div [hidden]="!patientDetail">
-    <patient-form-component></patient-form-component>
+    <patient-form-component [patient]='patient'></patient-form-component>
   </div>
   <table class="table table-bordered table-inverse">
     <tr>
@@ -29,7 +29,7 @@
         {{patient.lastName}}
       </td>
       <td class="text-right">
-        <a routerLink="/patientDetail/{{patient.id}}"> View Details </a>
+        <button pButton label="View Details" (click)="getPatient(patient.id)"> View Details </button>
       </td>
       <td class="text-right">
         <a routerLink="/appointmentsById/{{patient.id}}"> View Appointments </a>

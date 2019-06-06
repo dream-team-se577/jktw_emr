@@ -12,6 +12,17 @@ export class Address {
   static readonly addressLine1Regex = /^([0-9]+)\s(([0-9A-Za-z\.\'#]|[^\S\r\n])+)/;
   static readonly zipCodeRegex = /^[0-9]{5}(?:-[0-9]{4})?$/;
 
+  fromJson(address: any): void
+  {
+    this.streetNumber = address['streetNumber'];
+    this.addressLine2 = address['addressLine2'];
+    this.streetName = address['streetName'];
+    this.cityName = address['cityName'];
+    this.stateName = address['stateName'];
+    this.zipCode = address['zipCode'];
+    this.countryName = address['countryName'];
+  }
+
   toFormGroup(fb: FormBuilder) {
     let addressLine1Prefill = this.streetNumber && this.streetName ?
                               this.streetNumber + " " + this.streetName : "";
