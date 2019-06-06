@@ -14,6 +14,12 @@ export class Email {
     });
   }
 
+  fromJson(email: any): void
+  {
+    this.localPart = email['localPart'];
+    this.domain = email['domain'];
+  }
+
   fromFormGroup(fg: FormGroup): void{
     let match = Email.emailRegex.exec(fg['emailAddress']);
     if (!match)

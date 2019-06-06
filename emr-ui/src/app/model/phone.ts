@@ -15,6 +15,13 @@ export class Phone {
         });
   }
 
+  fromJson(phone: any): void
+  {
+    this.areaCode = phone['areaCode'];
+    this.prefix = phone['prefix'];
+    this.lineNumber = phone['lineNumber'];
+  }
+
   fromFormGroup(fg : FormGroup):void {
     let match = Phone.phoneRegex.exec(fg['phoneNumber']);
 

@@ -51,6 +51,35 @@
       <button type="button" (click)="addPhone()">Add Phone Number</button>
 
       <button type="submit" [disabled]="!patientForm.valid" class="btn btn-primary" >Submit</button>
+
+
+      <div *ngIf="patient && patient.appointments.length">
+        Appointments
+        <table class="table table-bordered table-inverse">
+          <tr>
+            <th>Id</th>
+          </tr>
+          <tr *ngFor="let appointment of patient.appointments">
+            <td>
+              {{appointment}}
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div *ngIf="patient && patient.labRecords.length">
+        Lab Records
+        <table class="table table-bordered table-inverse">
+          <tr>
+            <th>Id</th>
+          </tr>
+          <tr *ngFor="let record of patient.labRecords">
+            <td>
+              {{record}}
+            </td>
+          </tr>
+        </table>
+      </div>
     </fieldset>
   </form>
 </div>
