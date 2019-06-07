@@ -11,7 +11,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class LabService {
-  private labsUrl = 'server/labs';
+  private labsUrl = 'server/labRecords';
 
   constructor(private http: HttpClient) { }
 
