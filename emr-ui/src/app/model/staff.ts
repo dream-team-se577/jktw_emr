@@ -4,9 +4,11 @@ import { Email } from './email';
 
 export class Staff {
 	id: number;
-	name: string;
+	firstName: string;
+	middleName: string;
+	lastName: string;
 	addresses: Address[];
 	phoneNumbers: Phone[];
 	emailAddresses: Email[];
-	role: number;
+	role: string;
 }

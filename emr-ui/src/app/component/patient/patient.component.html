@@ -1,43 +1,43 @@
 <div style="align:center">
-<div class="container">
-  <button pButton label="Register" (click)="patientDetail=true" [hidden]="patientDetail">Register</button>
-  <button pButton label="Hide" (click)="patientDetail=false" [hidden]="!patientDetail">Hide</button>
-  <div [hidden]="!patientDetail">
-    <patient-form-component [patient]='patient'></patient-form-component>
+  <div class="container">
+    <button pButton label="Register" (click)="registerPatient()" [hidden]="patientDetail">Register</button>
+    <button pButton label="Hide" (click)="patientDetail=false" [hidden]="!patientDetail">Hide</button>
+    <div [hidden]="!patientDetail">
+      <patient-form-component [patient]='patient'></patient-form-component>
+    </div>
+    <table class="table table-bordered table-inverse">
+      <tr>
+        <th>Id</th>
+        <th>First-Name</th>
+        <th>Niddle-Name</th>
+        <th>Last-Name</th>
+        <th>Details</th>
+        <th>Appointments</th>
+        <th>Labs</th>
+      </tr>
+      <tr *ngFor="let patient of patients">
+        <td>
+          {{patient.id}}
+        </td>
+        <td>
+          {{patient.firstName}}
+        </td>
+        <td>
+          {{patient.middleName}}
+        </td>
+        <td>
+          {{patient.lastName}}
+        </td>
+        <td class="text-right">
+          <button pButton label="View Details" (click)="getPatient(patient.id)"> View Details </button>
+        </td>
+        <td class="text-right">
+          <a routerLink="/appointmentsById/{{patient.id}}"> View Appointments </a>
+        </td>
+        <td class="text-right">
+          <a routerLink="/labsById/{{patient.id}}"> View Labs </a>
+        </td>
+      </tr>
+    </table>
   </div>
-  <table class="table table-bordered table-inverse">
-    <tr>
-      <th>Id</th>
-      <th>First-Name</th>
-      <th>Niddle-Name</th>
-      <th>Last-Name</th>
-      <th>Details</th>
-      <th>Appointments</th>
-      <th>Labs</th>
-    </tr>
-    <tr *ngFor="let patient of patients">
-      <td>
-        {{patient.id}}
-      </td>
-      <td>
-        {{patient.firstName}}
-      </td>
-      <td>
-        {{patient.middleName}}
-      </td>
-      <td>
-        {{patient.lastName}}
-      </td>
-      <td class="text-right">
-        <button pButton label="View Details" (click)="getPatient(patient.id)"> View Details </button>
-      </td>
-      <td class="text-right">
-        <a routerLink="/appointmentsById/{{patient.id}}"> View Appointments </a>
-      </td>
-      <td class="text-right">
-        <a routerLink="/labsById/{{patient.id}}"> View Labs </a>
-      </td>
-    </tr>
-  </table>
-</div>
 </div>

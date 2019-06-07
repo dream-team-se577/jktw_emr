@@ -1,3 +1,7 @@
 <div class="container">
-  <patient-form-component></patient-form-component>
+  <button pButton label="Search Patient" (click)="mode = 'searchPatient'" [hidden]="mode == 'searchPatient'">Search Patient</button>
+  <div [hidden]="mode != 'searchPatient'">
+    <app-patient-search></app-patient-search>
+  </div>
+  <button pButton label="Cancel" (click)="mode = ''" [hidden]="mode != 'searchPatient'">Cancel</button>
 </div>

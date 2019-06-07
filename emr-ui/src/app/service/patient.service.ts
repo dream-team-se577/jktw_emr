@@ -12,6 +12,11 @@ const httpOptions = {
 })
 export class PatientService {
   private patientsUrl = 'server/patients';
+  private findByFirstNameUrl = '/search/findByFirstName'
+  private findByLastNameUrl = '/search/findByLastName';
+  private findByFirstNameAndLastNameUrl = '/search/findByFirstNameAndLastName';
+  private findByWholeNameUrl = '/search/findByFirstNameAndMiddleNameAndLastName';
+  private findBySsnUrl = '/search/findBySsn';
 
   constructor(private http: HttpClient) { }
 
@@ -66,6 +71,90 @@ export class PatientService {
     //.pipe(tap(_ => this.log(`updated patient id=${patient.id}`)),
     //catchError(this.handleError<any>('updatePatient'))
     //);
+  }
+
+  getPatientByFirstName (firstName: string) {
+      let url = [];
+      url.push(
+        this.patientsUrl,
+        this.findByFirstNameUrl,
+        '?',
+        'firstName=',
+        firstName
+      );
+      return this.http.get(url.join(""));
+      //.pipe(tap(_ => this.log(`updated patient id=${patient.id}`)),
+      //catchError(this.handleError<any>('updatePatient'))
+      //);
+  }
+
+  getPatientByLastName (lastName: string) {
+      let url = [];
+      url.push(
+        this.patientsUrl,
+        this.findByLastNameUrl,
+        '?',
+        'lastName=',
+        lastName
+      );
+      return this.http.get(url.join(""));
+      //.pipe(tap(_ => this.log(`updated patient id=${patient.id}`)),
+      //catchError(this.handleError<any>('updatePatient'))
+      //);
+  }
+
+  getPatientByFirstNameAndLastName (firstName: string, lastName: string) {
+      let url = [];
+      url.push(
+        this.patientsUrl,
+        this.findByFirstNameAndLastNameUrl,
+        '?',
+        'firstName=',
+        firstName,
+        '&',
+        'lastName=',
+        lastName
+      );
+      return this.http.get(url.join(""));
+      //.pipe(tap(_ => this.log(`updated patient id=${patient.id}`)),
+      //catchError(this.handleError<any>('updatePatient'))
+      //);
+  }
+
+  getPatientByWholeName (firstName: string, middleName: string, lastName: string) {
+      let url = [];
+      url.push(
+        this.patientsUrl,
+        this.findByWholeNameUrl,
+        '?',
+        'firstName=',
+        firstName,
+        '&',
+        'middleName=',
+        middleName,
+        '&',
+        'lastName=',
+        lastName
+      );
+      return this.http.get(url.join(""));
+      //.pipe(tap(_ => this.log(`updated patient id=${patient.id}`)),
+      //catchError(this.handleError<any>('updatePatient'))
+      //);
+  }
+
+  getPatientBySsn (ssn: string) {
+      let url = [];
+      url.push(
+        this.patientsUrl,
+        this.findBySsnUrl,
+        '?',
+        'ssn=',
+        ssn,
+      );
+      return this.http.get(url.join(""));
+      //.pipe(tap(_ => this.log(`updated patient id=${patient.id}`)),
+      //catchError(this.handleError<any>('updatePatient'))
+      //);
   }
 
   /** DELETE: delete the patient from the server */
