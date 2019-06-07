@@ -25,6 +25,8 @@ import { PhoneFormSubComponent } from './component/phone/phone.subcomponent';
 import { PatientFormComponent } from './component/patient-form/patient-form.component';
 import { StaffFormComponent } from './component/staff-form/staff-form.component';
 import { PatientSearchComponent } from './component/patient-search/patient-search.component';
+import { LabFormComponent } from './component/lab-form/lab-form.component';
+import { AppointmentFormComponent } from './component/appointment-form/appointment-form.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { PatientSearchComponent } from './component/patient-search/patient-searc
     PhoneFormSubComponent,
     PatientFormComponent,
     StaffFormComponent,
-    PatientSearchComponent
+    PatientSearchComponent,
+    LabFormComponent,
+    AppointmentFormComponent
   ],
   imports: [
     BrowserModule,
