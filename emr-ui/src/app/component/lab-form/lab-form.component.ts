@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { Lab } from '../../model/lab';
 
 @Component({
-  selector: 'app-lab-form',
+  selector: 'lab-form-component',
   templateUrl: './lab-form.component.html',
   styleUrls: ['./lab-form.component.css']
 })

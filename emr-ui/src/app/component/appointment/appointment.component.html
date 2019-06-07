@@ -1,7 +1,7 @@
 <div style="align:center">
   <div class="container">
-    <button pButton appointmentel="Register" (click)="registerAppointment()" [hidden]="appointmentDetail">Register</button>
-    <button pButton appointmentel="Hide" (click)="appointmentDetail=false" [hidden]="!appointmentDetail">Hide</button>
+    <button pButton label="Register" (click)="registerAppointment()" [hidden]="appointmentDetail">Register</button>
+    <button pButton label="Hide" (click)="appointmentDetail=false" [hidden]="!appointmentDetail">Hide</button>
     <div [hidden]="!appointmentDetail">
       <appointment-form-component [appointment]='appointment'></appointment-form-component>
     </div>

@@ -6,7 +6,7 @@ import { Appointment } from '../../model/appointment';
 import { Staff } from '../../model/staff';
 
 @Component({
-  selector: 'app-appointment-form',
+  selector: 'appointment-form-component',
   templateUrl: './appointment-form.component.html',
   styleUrls: ['./appointment-form.component.css']
 })
