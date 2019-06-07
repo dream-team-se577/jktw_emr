@@ -1,0 +1,42 @@
+<div style="align:center">
+  <div class="container">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" [(ngModel)]="lock"/> Unlock Lab Record
+      </label>
+    </div>
+    <form [formGroup]="labForm" (ngSubmit)="submitRegistration()" validate>
+      <fieldset [disabled]="lock">
+        <div *ngIf="validMessage != ''">
+          <h3 class="has-info">{{validMessage}}</h3>
+        </div>
+        <div class="form-group">
+          <input type="hidden" formControlName="id"  />
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="text" class="form-control" formControlName="date" autofocus/>
+        </div>
+        <div class="form-group">
+          <label>Results</label>
+          <input type="text" class="form-control" formControlName="results"/>
+        </div>
+        <div class="form-group">
+          <label>Patient</label>
+          <input type="text" class="form-control" formControlName="patient"/>
+        </div>
+        <div class="form-group">
+          <label>Type</label>
+          <select class="form-control" formControlName="type" required>
+            <option value="">Please select a type</option>
+            <option *ngFor="let t of type"
+                    [value]="t">
+                    {{t}}
+            </option>
+          </select>
+        </div>
+        <button type="submit" [disabled]="!labForm.valid" class="btn btn-primary" >Submit</button>
+      </fieldset>
+    </form>
+  </div>
+</div>
