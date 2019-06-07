@@ -1,27 +1,48 @@
 # EmrUi
 
+Download Node.js (https://nodejs.org/en/)
+
+Download Yarn (https://yarnpkg.com/en/)
+
+Type "npm install -g @angular/cli"
+
+Type "npm install @angular-devkit/build-angular"
+
+Use "npm start" in project directory
+
+To Create your Own Service:
+- ng g service services/<serviceName>
+- Will create the service as <serviceName>.service.ts
+
+To Create your Own Component:
+- ng g component components/admin
+- should generate "components" folder with "admin" and tx file, html and css inside
+
+
+## Generating Code:
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
 
-## Development server
+### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+### Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+### Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
+### Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+### Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+### Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

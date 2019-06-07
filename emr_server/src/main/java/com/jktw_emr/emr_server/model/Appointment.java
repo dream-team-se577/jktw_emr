@@ -62,7 +62,7 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm", timezone = "GMT-05:00")
     @NotNull
     private Date date;
     private String description;

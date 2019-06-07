@@ -1,0 +1,50 @@
+<div class="container">
+  <form [formGroup]="labForm" (ngSubmit)="submitSearch()" validate>
+    <div class="form-group">
+      <label>Start Date (YYYY-MM-dd HH:mm)</label>
+      <input type="text" class="form-control" formControlName="startDate" autofocus/>
+    </div>
+    <div class="form-group">
+      <label>End Date (YYYY-MM-dd HH:mm)</label>
+      <input type="text" class="form-control" formControlName="endDate"/>
+    </div>
+
+    <button type="submit" [disabled]="!(labForm.value['startDate'] || labForm.value['endDate'])" class="btn btn-primary">Submit</button>
+  </form>
+
+  <div *ngIf="validMessage != ''">
+    <h3 class="has-info">{{validMessage}}</h3>
+  </div>
+
+  <div *ngIf="labList && labList.length">
+    <table class="table table-bordered table-inverse">
+      <tr>
+        <th>Id</th>
+        <th>Type</th>
+        <th>Date</th>
+        <th>Results</th>
+        <th>Patient</th>
+      </tr>
+      <tr *ngFor="let lab of labList">
+        <td>
+          {{lab.id}}
+        </td>
+        <td>
+          {{lab.type}}
+        </td>
+        <td>
+          {{lab.date}}
+        </td>
+        <td>
+          {{lab.results}}
+        </td>
+        <td>
+          {{lab.patient}}
+        </td>
+        <td class="text-right">
+          <button pButton label="Select" (click)="pickLabRecord(lab)"> Select </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

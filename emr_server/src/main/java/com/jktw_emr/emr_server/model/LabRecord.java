@@ -52,7 +52,7 @@ public class LabRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm", timezone = "GMT-05:00")
     private Date date;
     private String results;
     @ManyToOne

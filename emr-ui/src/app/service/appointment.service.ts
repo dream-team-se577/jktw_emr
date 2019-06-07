@@ -13,6 +13,8 @@ const httpOptions = {
 })
 export class AppointmentService {
   private appointmentsUrl = 'server/appointments';
+  private findByDateBetweenUrl = '/search/findByDateBetween'
+  private findByPatientUrl = '/search/findByPatientId';
 
   constructor(private http: HttpClient) { }
 
@@ -73,6 +75,39 @@ export class AppointmentService {
     //.pipe(tap(_ => this.log(`updated appointment id=${appointment.id}`)),
     //catchError(this.handleError<any>('updateAppointment'))
     //);
+  }
+
+  getRecordsByDateBetween (startDate: string, endDate: string) {
+      let url = [];
+      url.push(
+        this.appointmentsUrl,
+        this.findByDateBetweenUrl,
+        '?',
+        'dateStart=',
+        startDate,
+        '&',
+        'dateEnd=',
+        endDate
+      );
+      return this.http.get(url.join(""));
+      //.pipe(tap(_ => this.log(`updated patient id=${patient.id}`)),
+      //catchError(this.handleError<any>('updatePatient'))
+      //);
+  }
+
+  getRecordsByPatient (patientId : number) {
+      let url = [];
+      url.push(
+        this.appointmentsUrl,
+        this.findByPatientUrl,
+        '?',
+        'patient=',
+        patientId
+      );
+      return this.http.get(url.join(""));
+      //.pipe(tap(_ => this.log(`updated patient id=${patient.id}`)),
+      //catchError(this.handleError<any>('updatePatient'))
+      //);
   }
 
   /** DELETE: delete the appointment from the server */
