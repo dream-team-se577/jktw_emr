@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../../service/appointment.service';
+import { AppointmentFormComponent } from "../appointment-form/appointment-form.component";
+import { Appointment } from "../../model/appointment";
 
 @Component({
   selector: 'app-appointment',
@@ -8,11 +10,28 @@ import { AppointmentService } from '../../service/appointment.service';
 })
 export class AppointmentComponent implements OnInit {
   public appointments;
+  appointmentDetail : boolean;
+  appointmentId: number;
+  appointment : Appointment;
 
   constructor(private appointmentService: AppointmentService) { }
 
   ngOnInit() {
     this.getAppointments();
+  }
+
+  registerAppointment() {
+    this.appointmentDetail = true;
+    this.appointment = null;
+  }
+
+  getAppointment(id: number) {
+    this.appointmentDetail = true;
+    this.appointmentService.getAppointment(id).subscribe(
+      data => this.appointment = <Appointment> data,
+      err => console.error(err),
+      () => console.log('appointment loaded')
+    );
   }
 
   getAppointments(): void {

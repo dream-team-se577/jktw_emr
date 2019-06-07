@@ -28,6 +28,8 @@ import { PatientSearchComponent } from './component/patient-search/patient-searc
 import { LabSearchComponent } from './component/lab-search/lab-search.component';
 import { StaffSearchComponent } from './component/staff-search/staff-search.component';
 import { AppointmentSearchComponent } from './component/appointment-search/appointment-search.component';
+import { LabFormComponent } from './component/lab-form/lab-form.component';
+import { AppointmentFormComponent } from './component/appointment-form/appointment-form.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { AppointmentSearchComponent } from './component/appointment-search/appoi
     PatientSearchComponent,
     LabSearchComponent,
     StaffSearchComponent,
-    AppointmentSearchComponent
+    AppointmentSearchComponent,
+    LabFormComponent,
+    AppointmentFormComponent
   ],
   imports: [
     BrowserModule,

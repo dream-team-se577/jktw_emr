@@ -1,50 +1,57 @@
-<div class="container">
-  <table class="table table-bordered table-inverse">
-    <tr>
-      <th>Id</th>
-      <th>Date</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Patient-Id</th>
-      <th>Staff-Id</th>
-      <th>Details</th>
-      <th>Patient</th>
-      <th>Staff</th>
-      <th>Create</th>
-      <th>Delete</th>
-    </tr>
-    <tr *ngFor="let appointment of appointments">
-      <td>
-        {{appointment.id}}
-      </td>
-      <td>
-        {{appointment.date}}
-      </td>
-        {{appointment.type}}
-      <td>
-        {{appointment.description}}
-      </td>
-      <td>
-        {{appointment.patient}}
-      </td>
-      <td>
+<div style="align:center">
+  <div class="container">
+    <button pButton label="Register" (click)="registerAppointment()" [hidden]="appointmentDetail">Register</button>
+    <button pButton label="Hide" (click)="appointmentDetail=false" [hidden]="!appointmentDetail">Hide</button>
+    <div [hidden]="!appointmentDetail">
+      <appointment-form-component [appointment]='appointment'></appointment-form-component>
+    </div>
+    <table class="table table-bordered table-inverse">
+      <tr>
+        <th>Id</th>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Patient-Id</th>
+        <th>Appointment-Id</th>
+        <th>Details</th>
+        <th>Patient</th>
+        <th>Staff</th>
+        <th>Create</th>
+        <th>Delete</th>
+      </tr>
+      <tr *ngFor="let appointment of appointments">
+        <td>
+          {{appointment.id}}
+        </td>
+        <td>
+          {{appointment.date}}
+        </td>
+          {{appointment.type}}
+        <td>
+          {{appointment.description}}
+        </td>
+        <td>
+          {{appointment.patient}}
+        </td>
+        <td>
 
-      </td>
-      <td class="text-right">
-        <a routerLink="/appointmentDetail/{{appointment.id}}"> View Details </a>
-      </td>
-      <td class="text-right">
-        <a routerLink="/patientDetail/{{appointment.patient}}"> View Patient </a>
-      </td>
-      <td class="text-right">
-        <a routerLink="/patientDetail/{{appointment.patient}}"> View Staff </a>
-      </td>
-      <td class="text-right">
-        <a routerLink="/appointmentCreate"> New Appointment </a>
-      </td>
-      <td class="text-right">
-        <button title="delete appointment" (click)="delete(appointment)">X</button>
-      </td>
-    </tr>
-  </table>
+        </td>
+        <td class="text-right">
+          <a routerLink="/appointmentDetail/{{appointment.id}}"> View Details </a>
+        </td>
+        <td class="text-right">
+          <a routerLink="/patientDetail/{{appointment.patient}}"> View Patient </a>
+        </td>
+        <td class="text-right">
+          <a routerLink="/patientDetail/{{appointment.patient}}"> View Staff </a>
+        </td>
+        <td class="text-right">
+          <a routerLink="/appointmentCreate"> New Appointment </a>
+        </td>
+        <td class="text-right">
+          <button title="delete appointment" (click)="delete(appointment)">X</button>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
