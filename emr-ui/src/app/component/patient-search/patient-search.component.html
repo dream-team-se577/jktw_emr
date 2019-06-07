@@ -1,0 +1,58 @@
+<div class="container">
+  <form [formGroup]="patientForm" (ngSubmit)="submitSearch()" validate>
+    <div class="form-group">
+      <label>Patient First Name</label>
+      <input type="text" class="form-control" formControlName="firstName" autofocus/>
+    </div>
+    <div class="form-group">
+      <label>Middle Name</label>
+      <input type="text" class="form-control" formControlName="middleName"/>
+    </div>
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" class="form-control" formControlName="lastName"/>
+    </div>
+    <div class="form-group">
+      <label>Patient SSN (XXX-XX-XXXX)</label>
+      <input type="text" class="form-control" formControlName="ssn"/>
+    </div>
+
+    <button type="submit" [disabled]="!(patientForm.value['firstName'] || patientForm.value['lastName'] || (patientForm.value['ssn'] && patientForm.value['ssn'].valid))" class="btn btn-primary">Submit</button>
+  </form>
+
+  <div *ngIf="validMessage != ''">
+    <h3 class="has-info">{{validMessage}}</h3>
+  </div>
+
+  <div *ngIf="patientList && patientList.length">
+    <table class="table table-bordered table-inverse">
+      <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Middle Name</th>
+        <th>Last Name</th>
+        <th>SSN</th>
+      </tr>
+      <tr *ngFor="let patient of patientList">
+        <td>
+          {{patient.id}}
+        </td>
+        <td>
+          {{patient.firstName}}
+        </td>
+        <td>
+          {{patient.middleName}}
+        </td>
+        <td>
+          {{patient.lastName}}
+        </td>
+        <td>
+          {{patient.ssn}}
+        </td>
+        <td class="text-right">
+          <button pButton label="Select" (click)="pickPatient(patient)"> Select </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

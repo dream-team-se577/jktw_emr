@@ -1,11 +1,16 @@
 <div class="container">
+  <button pButton label="Register" (click)="registerStaff()" [hidden]="staffDetail">Register</button>
+  <button pButton label="Hide" (click)="staffDetail=false" [hidden]="!staffDetail">Hide</button>
+  <div [hidden]="!staffDetail">
+    <staff-form-component [staff]='staff'></staff-form-component>
+  </div>
   <table class="table table-bordered table-inverse">
     <tr>
       <th>Id</th>
       <th>Role</th>
-      <th>First-Name</th>
-      <th>Niddle-Name</th>
-      <th>Last-Name</th>
+      <th>First Name</th>
+      <th>Middle Name</th>
+      <th>Last Name</th>
       <th>Details</th>
       <th>Appointments</th>
       <th>New</th>
@@ -27,13 +32,10 @@
         {{staff.lastName}}
       </td>
       <td class="text-right">
-        <a routerLink="/staffDetail/{{staff.id}}"> View Details </a>
+        <button pButton label="View Details" (click)="getStaff(staff.id)"> View Details </button>
       </td>
       <td class="text-right">
         <a routerLink="/appointmentsById/{{staff.id}}"> View Appointments </a>
-      </td>
-      <td class="text-right">
-        <a routerLink="/staffCreate"> New Staff </a>
       </td>
     </tr>
   </table>

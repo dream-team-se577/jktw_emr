@@ -23,6 +23,8 @@ import { AddressFormSubComponent } from './component/address/address.subcomponen
 import { EmailFormSubComponent } from './component/email/email.subcomponent';
 import { PhoneFormSubComponent } from './component/phone/phone.subcomponent';
 import { PatientFormComponent } from './component/patient-form/patient-form.component';
+import { StaffFormComponent } from './component/staff-form/staff-form.component';
+import { PatientSearchComponent } from './component/patient-search/patient-search.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { PatientFormComponent } from './component/patient-form/patient-form.comp
     AddressFormSubComponent,
     EmailFormSubComponent,
     PhoneFormSubComponent,
-    PatientFormComponent
+    PatientFormComponent,
+    StaffFormComponent,
+    PatientSearchComponent
   ],
   imports: [
     BrowserModule,
