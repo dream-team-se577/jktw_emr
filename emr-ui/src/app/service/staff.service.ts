@@ -12,6 +12,11 @@ const httpOptions = {
 })
 export class StaffService {
   private staffsUrl = 'server/staffMembers';
+  private findByFirstNameUrl = '/search/findByFirstName'
+  private findByLastNameUrl = '/search/findByLastName';
+  private findByFirstNameAndLastNameUrl = '/search/findByFirstNameAndLastName';
+  private findByWholeNameUrl = '/search/findByFirstNameAndMiddleNameAndLastName';
+  private findByRoleUrl = '/search/findByRole';
 
   constructor(private http: HttpClient) { }
 
@@ -53,6 +58,90 @@ export class StaffService {
     //.pipe(tap(_ => this.log(`updated staff id=${staff.id}`)),
     //catchError(this.handleError<any>('updateStaff'))
     //);
+  }
+
+  getStaffByFirstName (firstName: string) {
+      let url = [];
+      url.push(
+        this.staffsUrl,
+        this.findByFirstNameUrl,
+        '?',
+        'firstName=',
+        firstName
+      );
+      return this.http.get(url.join(""));
+      //.pipe(tap(_ => this.log(`updated staff id=${staff.id}`)),
+      //catchError(this.handleError<any>('updateStaff'))
+      //);
+  }
+
+  getStaffByLastName (lastName: string) {
+      let url = [];
+      url.push(
+        this.staffsUrl,
+        this.findByLastNameUrl,
+        '?',
+        'lastName=',
+        lastName
+      );
+      return this.http.get(url.join(""));
+      //.pipe(tap(_ => this.log(`updated staff id=${staff.id}`)),
+      //catchError(this.handleError<any>('updateStaff'))
+      //);
+  }
+
+  getStaffByFirstNameAndLastName (firstName: string, lastName: string) {
+      let url = [];
+      url.push(
+        this.staffsUrl,
+        this.findByFirstNameAndLastNameUrl,
+        '?',
+        'firstName=',
+        firstName,
+        '&',
+        'lastName=',
+        lastName
+      );
+      return this.http.get(url.join(""));
+      //.pipe(tap(_ => this.log(`updated staff id=${staff.id}`)),
+      //catchError(this.handleError<any>('updateStaff'))
+      //);
+  }
+
+  getStaffByWholeName (firstName: string, middleName: string, lastName: string) {
+      let url = [];
+      url.push(
+        this.staffsUrl,
+        this.findByWholeNameUrl,
+        '?',
+        'firstName=',
+        firstName,
+        '&',
+        'middleName=',
+        middleName,
+        '&',
+        'lastName=',
+        lastName
+      );
+      return this.http.get(url.join(""));
+      //.pipe(tap(_ => this.log(`updated staff id=${staff.id}`)),
+      //catchError(this.handleError<any>('updateStaff'))
+      //);
+  }
+
+  getStaffByRole (role: string) {
+      let url = [];
+      url.push(
+        this.staffsUrl,
+        this.findByRoleUrl,
+        '?',
+        'role=',
+        role,
+      );
+      return this.http.get(url.join(""));
+      //.pipe(tap(_ => this.log(`updated staff id=${staff.id}`)),
+      //catchError(this.handleError<any>('updateStaff'))
+      //);
   }
 
   /** DELETE: delete the staff from the server */

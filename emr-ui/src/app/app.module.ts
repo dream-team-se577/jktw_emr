@@ -25,6 +25,9 @@ import { PhoneFormSubComponent } from './component/phone/phone.subcomponent';
 import { PatientFormComponent } from './component/patient-form/patient-form.component';
 import { StaffFormComponent } from './component/staff-form/staff-form.component';
 import { PatientSearchComponent } from './component/patient-search/patient-search.component';
+import { LabSearchComponent } from './component/lab-search/lab-search.component';
+import { StaffSearchComponent } from './component/staff-search/staff-search.component';
+import { AppointmentSearchComponent } from './component/appointment-search/appointment-search.component';
 import { LabFormComponent } from './component/lab-form/lab-form.component';
 import { AppointmentFormComponent } from './component/appointment-form/appointment-form.component';
 
@@ -47,6 +50,9 @@ import { AppointmentFormComponent } from './component/appointment-form/appointme
     PatientFormComponent,
     StaffFormComponent,
     PatientSearchComponent,
+    LabSearchComponent,
+    StaffSearchComponent,
+    AppointmentSearchComponent,
     LabFormComponent,
     AppointmentFormComponent
   ],

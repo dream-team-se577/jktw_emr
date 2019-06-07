@@ -33,12 +33,13 @@ export class PatientSearchComponent implements OnInit {
 
   submitSearch() {
     this.validMessage = "";
+    this.patientList = [];
     let patientFormValues = this.patientForm.value;
     let query = null;
     if (patientFormValues['ssn']){
       query = this.patientService.getPatientBySsn(patientFormValues['ssn']);
     }
-    if (patientFormValues['firstName'] && !patientFormValues['lastName']){
+    else if (patientFormValues['firstName'] && !patientFormValues['lastName']){
       query = this.patientService.getPatientByFirstName(patientFormValues['firstName']);
     }
     else if (patientFormValues['lastName'] && !patientFormValues['firstName']){

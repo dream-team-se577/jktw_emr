@@ -12,6 +12,8 @@ const httpOptions = {
 })
 export class LabService {
   private labsUrl = 'server/labRecords';
+  private findByDateBetweenUrl = '/search/findByDateBetween'
+  private findByPatientUrl = '/search/findByPatientId';
 
   constructor(private http: HttpClient) { }
 
@@ -38,6 +40,39 @@ export class LabService {
     //.pipe(tap(_ => this.log(`fetched lab id=${id}`)),
     //catchError(this.handleError<Lab>(`getLab id=${id}`))
     //);
+  }
+
+  getRecordsByDateBetween (startDate: string, endDate: string) {
+      let url = [];
+      url.push(
+        this.labsUrl,
+        this.findByDateBetweenUrl,
+        '?',
+        'dateStart=',
+        startDate,
+        '&',
+        'dateEnd=',
+        endDate
+      );
+      return this.http.get(url.join(""));
+      //.pipe(tap(_ => this.log(`updated patient id=${patient.id}`)),
+      //catchError(this.handleError<any>('updatePatient'))
+      //);
+  }
+
+  getRecordsByPatient (patientId : number) {
+      let url = [];
+      url.push(
+        this.labsUrl,
+        this.findByPatientUrl,
+        '?',
+        'patient=',
+        patientId
+      );
+      return this.http.get(url.join(""));
+      //.pipe(tap(_ => this.log(`updated patient id=${patient.id}`)),
+      //catchError(this.handleError<any>('updatePatient'))
+      //);
   }
 
   /** GET lab by id. Will 404 if id not found */
