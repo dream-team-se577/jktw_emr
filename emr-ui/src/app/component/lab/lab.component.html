@@ -1,46 +1,12 @@
 <div style="align:center">
   <div class="container">
-    <button pButton label="Register" (click)="registerLab()" [hidden]="labDetail">Register</button>
-    <button pButton label="Hide" (click)="labDetail=false" [hidden]="!labDetail">Hide</button>
-    <div [hidden]="!labDetail">
-      <lab-form-component [lab]='lab'></lab-form-component>
+    <button pButton label="Register" (click)="labCreate=true" [hidden]="labCreate">Register</button>
+    <button pButton label="Hide" (click)="labCreate=false" [hidden]="!labCreate">Hide</button>
+    <div [hidden]="!labCreate">
+      <app-lab-create></app-lab-create>
     </div>
-    <table class="table table-bordered table-inverse">
-      <tr>
-        <th>id</th>
-        <th>date</th>
-        <th>type</th>
-        <th>result</th>
-        <th>lab-id</th>
-        <th>Details</th>
-        <th>New</th>
-      </tr>
-      <tr *ngFor="let lab of labs">
-        <td>
-          {{lab.id}}
-        </td>
-        <td>
-          {{lab.date}}
-        </td>
-        <td>
-          {{lab.type}}
-        </td>
-        <td>
-          {{lab.result}}
-        </td>
-        <td>
-          {{lab.lab-id}}
-        </td>
-        <td class="text-right">
-          <a routerLink="/labDetail/{{lab.id}}"> View Details </a>
-        </td>
-        <td class="text-right">
-          <a routerLink="/labDetail/{{lab.id}}"> View Patient </a>
-        </td>
-        <td class="text-right">
-          <a routerLink="/labCreate"> New Lab </a>
-        </td>
-      </tr>
-    </table>
+    <div>
+      <app-lab-list [labs]="labs"></app-lab-list>
+    </div>
   </div>
 </div>

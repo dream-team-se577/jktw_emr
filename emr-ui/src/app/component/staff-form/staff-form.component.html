@@ -4,7 +4,7 @@
       <input type="checkbox" [(ngModel)]="lock"/> Unlock Staff Record
     </label>
   </div>
-  <form [formGroup]="staffForm" (ngSubmit)="submitRegistration()" validate>
+  <form [formGroup]="staffForm" (ngSubmit)="updateStaff()" validate>
     <fieldset [disabled]="lock">
       <div *ngIf="validMessage != ''">
         <h3 class="has-info">{{validMessage}}</h3>

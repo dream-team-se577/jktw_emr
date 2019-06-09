@@ -1,98 +1,85 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { LabService } from '../../service/lab.service';
+import { ActivatedRoute } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
+import { Location } from '@angular/common';
 import { Lab } from '../../model/lab';
+import { Staff } from '../../model/staff';
+import { Patient } from '../../model/patient';
 
 @Component({
   selector: 'lab-form-component',
   templateUrl: './lab-form.component.html',
   styleUrls: ['./lab-form.component.css']
 })
-export class LabFormComponent implements OnInit, OnChanges {
+export class LabFormComponent implements OnInit {
   labForm: FormGroup;
   validMessage: string = "";
   lock : boolean = true;
+  type : string[] = Lab.Types;
+
   @Input() lab: Lab;
 
-  type : string[] = [
-    'Blood',
-    'Urine',
-    'MRI',
-    'CT-Scan',
-  ];
+  constructor(private route: ActivatedRoute,
+              private labService: LabService,
+              private fb: FormBuilder,
+              private location: Location) { }
 
-  constructor(private labService: LabService,
-              private fb: FormBuilder) { }
+  ngOnInit() {
+    this.getLab();
+  }
 
-    ngOnInit() {
-      if (this.lab)
-      {
-        this.lock = true;
-        let existingLab = this.fb.group({
-          id : new FormControl(this.lab.id),
-          date: new FormControl(this.lab.date, Validators.required),
-          results: new FormControl(this.lab.results),
-          patient: new FormControl(this.lab.patient, Validators.required),
-          type: new FormControl(this.lab.type, Validators.required)
-        });
+  getLab(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.labService.getLab(id)
+      .subscribe(lab => this.createForm(lab));
+  }
 
-        this.labForm = existingLab;
-      }
-      else
-      {
-        this.lock = false;
-        let newForm = this.fb.group({
-          id : new FormControl(),
-          date: new FormControl('', Validators.required),
-          results: new FormControl('', Validators.required),
-          patient: new FormControl('', Validators.required),
-          type: new FormControl('', Validators.required),
-        });
+  createForm(lab: any): void
+  {
+    if (lab)
+    {
+      this.lab = new Lab();
+      this.lab.fromJson(lab);
+      this.labForm = this.fb.group({
+        date: new FormControl(this.lab.date, Validators.required),
+        results: new FormControl(this.lab.results),
+        type: new FormControl(this.lab.type, Validators.required)
+      });
 
-        this.labForm = newForm;
-      }
+      this.lock = true;
     }
-
-    ngOnChanges() {
-      this.ngOnInit();
-    }
-
-    submitRegistration() {
-      this.updateLab(this.lab == null)
-    }
-
-    updateLab(newLab:boolean) {
-      if (this.labForm.valid) {
-        let labFormInfo = this.labForm.value;
-        let lab = new Lab();
-        lab.date = labFormInfo['date'];
-        lab.results = labFormInfo['results'];
-        lab.patient = labFormInfo['lastName'];
-        lab.type = labFormInfo['type'];
-
-        if (!newLab)
-        {
-          lab.id = this.lab.id;
-        }
-
-        let action = newLab ? this.labService.addLab(lab) :
-                                  this.labService.updateLab(lab);
-
-        action.subscribe(
-          data => {
-            this.labForm.reset();
-            this.validMessage = "Your lab has been registered!";
-            return true;
-          },
-          error => {
-            this.validMessage = "Lab failed to register";
-            return Observable.throw(error);
-          }
-        )
-      }
-      else {
-        this.validMessage = "Please fill out the required fields.";
-      }
+    else
+    {
+      this.validMessage = "Lab could not be found!"
     }
   }
+
+  submitChange() {
+    if (this.labForm.valid) {
+      let labFormInfo = this.labForm.value;
+      this.lab.date = labFormInfo['date'];
+      this.lab.results = labFormInfo['results'];
+      this.lab.type = labFormInfo['type'];
+
+      this.labService.updateLab(this.lab).subscribe(
+        data => {
+          this.validMessage = "Your lab has been updated!";
+          return true;
+        },
+        error => {
+          this.validMessage = "Lab record failed to update!";
+          return Observable.throw(error);
+        }
+      )
+    }
+    else {
+      this.validMessage = "Please fill out the required fields.";
+    }
+  }
+
+  cancel(): void {
+    this.location.back();
+  }
+}

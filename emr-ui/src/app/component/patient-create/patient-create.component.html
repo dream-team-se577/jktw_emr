@@ -1,39 +1,48 @@
 <div class="container">
-  <form [formGroup]="patientform" (ngSubmit)="createStaff()" novalidate>
-    <div *ngIf="validMessage != ''">
-      <h3 class="has-info">{{validMessage}}</h3>
-    </div>
-    <div class="form-group">
-      <label>First Name</label>
-      <input type="text" class="form-control" formControlName="firstName" required autofocus/>
-    </div>
-    <div class="form-group">
-      <label>Middle Name</label>
-      <input type="text" class="form-control" formControlName="middleName" required/>
-    </div>
-    <div class="form-group">
-      <label>Last Name</label>
-      <input type="text" class="form-control" formControlName="lastName" required/>
-    </div>
-    <div class="form-group">
-      <label>SSN</label>
-      <input type="text" class="form-control" formControlName="ssn" required/>
-    </div>
-    <div class="form-group">
-      <input type="hidden" class="form-control" formControlName="addresses" value="{{hidden}}" />
-    </div>
-    <div class="form-group">
-      <input type="hidden" class="form-control" formControlName="emailAddresses" value="{{hidden}}" />
-    </div>
-    <div class="form-group">
-      <input type="hidden" class="form-control" formControlName="phoneNumbers" value="{{hidden}}" />
-    </div>
-    <div class="form-group">
-      <input type="hidden" class="form-control" formControlName="appointments" value="{{hidden}}" />
-    </div>
-    <div class="form-group">
-      <input type="hidden" class="form-control" formControlName="labRecords" value="{{hidden}}" />
-    </div>
-    <button type="submit" class="btn btn-primary" >Submit</button>
+  <form [formGroup]="patientForm" (ngSubmit)="submitRegistration()" validate>
+    <fieldset [disabled]="lock">
+      <div *ngIf="validMessage != ''">
+        <h3 class="has-info">{{validMessage}}</h3>
+      </div>
+      <div class="form-group">
+        <label>Patient First Name</label>
+        <input type="text" class="form-control" formControlName="firstName" autofocus/>
+      </div>
+      <div class="form-group">
+        <label>Patient Middle Name</label>
+        <input type="text" class="form-control" formControlName="middleName"/>
+      </div>
+      <div class="form-group">
+        <label>Patient Last Name</label>
+        <input type="text" class="form-control" formControlName="lastName"/>
+      </div>
+      <div class="form-group">
+        <label>Patient SSN</label>
+        <input type="text" class="form-control" formControlName="ssn"/>
+      </div>
+      <div formArrayName="addresses">
+          <div *ngFor="let control of patientForm.controls['addresses'].controls; let i = index">
+              <button type="button" (click)="delAddress(i)">Delete</button>
+              <address-sub-component [addressForm]="patientForm.controls.addresses.controls[i]"></address-sub-component>
+          </div>
+      </div>
+      <button type="button" (click)="addAddress()">Add Address</button>
+      <div formArrayName="emailAddresses">
+          <div *ngFor="let control of patientForm.controls['emailAddresses'].controls; let i = index">
+              <button type="button" (click)="delEmail(i)">Delete</button>
+              <email-sub-component [emailForm]="patientForm.controls.emailAddresses.controls[i]"></email-sub-component>
+          </div>
+      </div>
+      <button type="button" (click)="addEmail()">Add Email</button>
+      <div formArrayName="phoneNumbers">
+          <div *ngFor="let control of patientForm.controls['phoneNumbers'].controls; let i = index">
+              <button type="button" (click)="delPhone(i)">Delete</button>
+              <phone-sub-component [phoneForm]="patientForm.controls.phoneNumbers.controls[i]"></phone-sub-component>
+          </div>
+      </div>
+      <button type="button" (click)="addPhone()">Add Phone Number</button>
+
+      <button type="submit" [disabled]="!patientForm.valid" class="btn btn-primary" >Submit</button>
+    </fieldset>
   </form>
 </div>

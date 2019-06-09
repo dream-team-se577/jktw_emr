@@ -13,12 +13,11 @@ import { StaffComponent } from './component/staff/staff.component';
 import { PatientComponent } from './component/patient/patient.component';
 import { LabComponent } from './component/lab/lab.component';
 import { AppointmentComponent } from './component/appointment/appointment.component';
-import { PatientDetailComponent } from './component/patient-detail/patient-detail.component';
-import { StaffDetailComponent } from './component/staff-detail/staff-detail.component';
-import { LabDetailComponent } from './component/lab-detail/lab-detail.component';
-import { AppointmentDetailComponent } from './component/appointment-detail/appointment-detail.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { StaffCreateComponent } from './component/staff-create/staff-create.component';
+import { PatientCreateComponent } from './component/patient-create/patient-create.component';
+import { LabCreateComponent } from './component/lab-create/lab-create.component';
+import { AppointmentCreateComponent } from './component/appointment-create/appointment-create.component';
 import { AddressFormSubComponent } from './component/address/address.subcomponent';
 import { EmailFormSubComponent } from './component/email/email.subcomponent';
 import { PhoneFormSubComponent } from './component/phone/phone.subcomponent';
@@ -30,6 +29,10 @@ import { StaffSearchComponent } from './component/staff-search/staff-search.comp
 import { AppointmentSearchComponent } from './component/appointment-search/appointment-search.component';
 import { LabFormComponent } from './component/lab-form/lab-form.component';
 import { AppointmentFormComponent } from './component/appointment-form/appointment-form.component';
+import { AppointmentListComponent } from './component/appointment-list/appointment-list.component';
+import { LabListComponent } from './component/lab-list/lab-list.component';
+import { PatientListComponent } from './component/patient-list/patient-list.component';
+import { StaffListComponent } from './component/staff-list/staff-list.component';
 
 @NgModule({
   declarations: [
@@ -38,12 +41,11 @@ import { AppointmentFormComponent } from './component/appointment-form/appointme
     PatientComponent,
     LabComponent,
     AppointmentComponent,
-    PatientDetailComponent,
-    StaffDetailComponent,
-    LabDetailComponent,
-    AppointmentDetailComponent,
     DashboardComponent,
     StaffCreateComponent,
+    PatientCreateComponent,
+    LabCreateComponent,
+    AppointmentCreateComponent,
     AddressFormSubComponent,
     EmailFormSubComponent,
     PhoneFormSubComponent,
@@ -54,7 +56,11 @@ import { AppointmentFormComponent } from './component/appointment-form/appointme
     StaffSearchComponent,
     AppointmentSearchComponent,
     LabFormComponent,
-    AppointmentFormComponent
+    AppointmentFormComponent,
+    AppointmentListComponent,
+    LabListComponent,
+    PatientListComponent,
+    StaffListComponent
   ],
   imports: [
     BrowserModule,

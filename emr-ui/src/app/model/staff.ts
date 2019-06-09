@@ -12,6 +12,13 @@ export class Staff {
 	emailAddresses: Email[];
 	role: string;
 
+	public static Roles: string[] = [
+	    'Admin',
+	    'Nurse',
+	    'Doctor',
+	    'Billing',
+	  ];
+
 	fromJson(staff: any): void
   {
     this.id = staff['id'];

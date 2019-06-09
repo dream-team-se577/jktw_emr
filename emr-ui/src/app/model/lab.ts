@@ -6,6 +6,13 @@ export class Lab {
 	type: string;
 	staff: number[];
 
+	public static Types : string[] = [
+	    'Blood',
+	    'Urine',
+	    'MRI',
+	    'CT-Scan',
+	  ];
+
 	fromJson(lab: any): void
   {
     this.id = lab['id'];

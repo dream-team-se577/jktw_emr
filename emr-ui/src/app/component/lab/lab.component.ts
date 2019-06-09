@@ -9,10 +9,8 @@ import { Lab } from "../../model/lab";
   styleUrls: ['./lab.component.css']
 })
 export class LabComponent implements OnInit {
-  public labs;
-  labDetail : boolean;
-  labId: number;
-  lab : Lab;
+  labs: number[];
+  labCreate : boolean;
 
   constructor(private labService: LabService) { }
 
@@ -20,26 +18,11 @@ export class LabComponent implements OnInit {
     this.getLabs();
   }
 
-  registerLab() {
-    this.labDetail = true;
-    this.lab = null;
-  }
-
   getLabs(): void {
 		this.labService.getLabs().subscribe(
-      data => {this.labs = data},
+      (data : any[]) =>{this.labs = data.map(x => x.id)},
       err => console.error(err),
       () => console.log('labs loaded')
     );
 	}
-
-  getLab(id: number) {
-    this.labDetail = true;
-    this.labService.getLab(id).subscribe(
-      data => this.lab = <Lab> data,
-      err => console.error(err),
-      () => console.log('lab loaded')
-    );
-  }
-
 }

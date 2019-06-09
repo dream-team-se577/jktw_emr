@@ -1,5 +1,7 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { StaffService } from '../../service/staff.service';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { Staff } from '../../model/staff';
@@ -12,26 +14,48 @@ import { Email } from '../../model/email';
   templateUrl: './staff-form.component.html',
   styleUrls: ['./staff-form.component.css']
 })
-export class StaffFormComponent implements OnInit, OnChanges {
+export class StaffFormComponent implements OnInit {
   staffForm: FormGroup;
   validMessage: string = "";
   lock : boolean = true;
+  role : string[] = Staff.Roles;
+
   @Input() staff: Staff;
 
-  role : string[] = [
-    'Admin',
-    'Nurse',
-    'Doctor',
-    'Billing',
-  ];
-
-  constructor(private staffService: StaffService,
-              private fb: FormBuilder) { }
+  constructor(private route: ActivatedRoute,
+              private staffService: StaffService,
+              private fb: FormBuilder,
+              private location: Location) { }
 
   ngOnInit() {
-    if (this.staff)
+    // Still have to initialize these before response comes back
+    this.staffForm  = this.fb.group({
+      id : new FormControl(''),
+      firstName: new FormControl('', Validators.required),
+      middleName: new FormControl(''),
+      lastName: new FormControl('', Validators.required),
+      role: new FormControl('', Validators.required),
+      addresses: this.fb.array([]),
+      phoneNumbers: this.fb.array([]),
+      emailAddresses: this.fb.array([])
+    });
+
+    this.getStaff();
+  }
+
+  getStaff(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.staffService.getStaff(id)
+      .subscribe(staff => this.createForm(staff));
+  }
+
+  createForm(staff: any): void
+  {
+    if (staff)
     {
-      this.lock = true;
+      this.staff = new Staff();
+      this.staff.fromJson(staff);
+
       let existingStaff = this.fb.group({
         id : new FormControl(this.staff.id),
         firstName: new FormControl(this.staff.firstName, Validators.required),
@@ -65,27 +89,12 @@ export class StaffFormComponent implements OnInit, OnChanges {
       });
 
       this.staffForm = existingStaff;
+      this.lock = true;
     }
     else
     {
-      this.lock = false;
-      let newForm = this.fb.group({
-        id : new FormControl(),
-        firstName: new FormControl('', Validators.required),
-        middleName: new FormControl(),
-        lastName: new FormControl('', Validators.required),
-        role: new FormControl('', Validators.required),
-        addresses: this.fb.array([]),
-        phoneNumbers: this.fb.array([]),
-        emailAddresses: this.fb.array([])
-      });
-
-      this.staffForm = newForm;
+      this.validMessage = "Staff could not be found!"
     }
-  }
-
-  ngOnChanges() {
-    this.ngOnInit();
   }
 
   addAddress(): void {
@@ -118,11 +127,7 @@ export class StaffFormComponent implements OnInit, OnChanges {
       arrayControl.removeAt(index);
   }
 
-  submitRegistration() {
-    this.updateStaff(this.staff == null)
-  }
-
-  updateStaff(newStaff:boolean) {
+  updateStaff() {
     if (this.staffForm.valid) {
       let staffFormInfo = this.staffForm.value;
       let staff = new Staff();
@@ -131,6 +136,7 @@ export class StaffFormComponent implements OnInit, OnChanges {
       {
         staff.middleName = staffFormInfo['middleName'];
       }
+
       staff.lastName = staffFormInfo['lastName'];
       staff.role = staffFormInfo['role'];
       staff.addresses = [];
@@ -154,22 +160,16 @@ export class StaffFormComponent implements OnInit, OnChanges {
         staff.emailAddresses.push(email);
       }
 
-      if (!newStaff)
-      {
-        staff.id = this.staff.id;
-      }
+      staff.id = this.staff.id;
 
-      let action = newStaff ? this.staffService.addStaff(staff) :
-                                this.staffService.updateStaff(staff);
-
-      action.subscribe(
+      this.staffService.updateStaff(staff).subscribe(
         data => {
           this.staffForm.reset();
-          this.validMessage = "Your staff has been registered!";
+          this.validMessage = "Your staff has been updated!";
           return true;
         },
         error => {
-          this.validMessage = "Staff failed to register";
+          this.validMessage = "Staff failed to update";
           return Observable.throw(error);
         }
       )

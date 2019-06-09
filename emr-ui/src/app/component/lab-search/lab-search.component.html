@@ -9,7 +9,7 @@
       <input type="text" class="form-control" formControlName="endDate"/>
     </div>
 
-    <button type="submit" [disabled]="!(labForm.value['startDate'] || labForm.value['endDate'])" class="btn btn-primary">Submit</button>
+    <button type="submit" [disabled]="!(labForm.value['startDate'] || labForm.value['endDate'])" class="btn btn-primary">Search Lab Records</button>
   </form>
 
   <div *ngIf="validMessage != ''">
@@ -23,7 +23,6 @@
         <th>Type</th>
         <th>Date</th>
         <th>Results</th>
-        <th>Patient</th>
       </tr>
       <tr *ngFor="let lab of labList">
         <td>
@@ -37,9 +36,6 @@
         </td>
         <td>
           {{lab.results}}
-        </td>
-        <td>
-          {{lab.patient}}
         </td>
         <td class="text-right">
           <button pButton label="Select" (click)="pickLabRecord(lab)"> Select </button>
