@@ -8,6 +8,8 @@ Download Yarn (https://yarnpkg.com/en/)
 
 Use "npm start" in project directory
 
+Using your browser, type "http://localhost:4200/dashboard" in the address bar.
+
 
 ## Generating Code:
 
