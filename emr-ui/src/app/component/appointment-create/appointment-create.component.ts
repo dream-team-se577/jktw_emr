@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AppointmentService } from '../../service/appointment.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Observable, throwError } from 'rxjs';
+import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { Appointment } from '../../model/appointment';
+import { Staff } from '../../model/staff';
+import { Patient } from '../../model/patient';
 
 @Component({
   selector: 'app-appointment-create',
@@ -9,43 +12,70 @@ import { Observable, throwError } from 'rxjs';
   styleUrls: ['./appointment-create.component.css']
 })
 export class AppointmentCreateComponent implements OnInit {
-  type : string[] = [
-    'Check-up',
-    'follow-up',
-    'illness',
-  ];
-  hidden : string = "[]"
-  appointmentform : FormGroup;
-  validMessage :string = "";
+  appointmentForm: FormGroup;
+  validMessage: string = "";
+  patient: Patient;
+  staff: number[] = [];
+  type : string[] = Appointment.Types;
 
-  constructor(private appointmentService:AppointmentService) { }
+  constructor(private appointmentService: AppointmentService,
+              private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.appointmentform = new FormGroup({
+    this.appointmentForm = this.fb.group({
       date: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
-      type: new FormControl('', Validators.required),
-      patient: new FormControl(),
-      staff: new FormControl(),
+      type: new FormControl('', Validators.required)
     });
   }
 
-  createStaff() {
+  onPatientAdded(patient: Patient) {
+    this.patient = patient;
+  }
 
-    if (this.appointmentform.valid) {
-      this.validMessage = "Appointment created successfully";
-      this.appointmentService.addAppointment(this.appointmentform.value).subscribe(
-        data => {
-          this.appointmentform.reset();
-          return true;
-        },
-        error => {
-          return throwError(error);
-        }
-      )
-    } else {
-        this.validMessage = "Please fill out all required fields";
+  onStaffAdded(staff : Staff) {
+    if (this.staff.indexOf(staff.id) == -1)
+    {
+      let tmp = [];
+      this.staff.forEach(x => tmp.push(x));
+      tmp.push(staff.id);
+      this.staff = tmp;
     }
   }
 
+  onStaffRemoved(staff : Staff) {
+    const index = this.staff.indexOf(staff.id, 0);
+    if (index > -1) {
+       this.staff.splice(index, 1);
+    }
+  }
+
+  submitRegistration() {
+    if (this.appointmentForm.valid) {
+      let appointmentFormInfo = this.appointmentForm.value;
+      let appointment = new Appointment();
+      appointment.date = appointmentFormInfo['date'];
+      appointment.description = appointmentFormInfo['description'];
+      appointment.patient = this.patient.id;
+      appointment.type = appointmentFormInfo['type'];
+      appointment.staff = this.staff;
+
+      this.appointmentService.addAppointment(appointment).subscribe(
+        data => {
+          this.appointmentForm.reset();
+          this.staff = [];
+          this.patient = null;
+          this.validMessage = "Your appointment has been registered!";
+          return true;
+        },
+        error => {
+          this.validMessage = "Appointment failed to register";
+          return Observable.throw(error);
+        }
+      )
+    }
+    else {
+      this.validMessage = "Please fill out the required fields.";
+    }
+  }
 }

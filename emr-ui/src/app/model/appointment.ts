@@ -6,6 +6,12 @@ export class Appointment {
 	type: string;
 	staff: number[];
 
+	public static Types : string[] = [
+    'Check-up',
+    'Follow-up',
+    'Treatment',
+  ];
+
 	fromJson(appointment: any): void
   {
     this.id = appointment['id'];

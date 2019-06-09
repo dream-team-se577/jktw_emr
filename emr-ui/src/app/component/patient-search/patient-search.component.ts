@@ -12,9 +12,9 @@ import { Patient } from '../../model/patient';
 export class PatientSearchComponent implements OnInit {
   patientForm: FormGroup;
   patientList: Patient[] = [];
-
   validMessage: string = "";
-  @Output() onPatientPicked: EventEmitter<any> = new EventEmitter<any>();
+  
+  @Output() onPatientPicked: EventEmitter<Patient> = new EventEmitter<Patient>();
 
 
   constructor(private patientService: PatientService,
@@ -36,8 +36,8 @@ export class PatientSearchComponent implements OnInit {
     this.patientList = [];
     let patientFormValues = this.patientForm.value;
     let query = null;
-    if (patientFormValues['ssn']){
-      query = this.patientService.getPatientBySsn(patientFormValues['ssn']);
+    if (patientFormValues['ssn'] && this.patientForm.controls['ssn'].valid){
+      query = this.patientService.getPatientBySsn(patientFormValues['ssn'].split('-').join(''));
     }
     else if (patientFormValues['firstName'] && !patientFormValues['lastName']){
       query = this.patientService.getPatientByFirstName(patientFormValues['firstName']);

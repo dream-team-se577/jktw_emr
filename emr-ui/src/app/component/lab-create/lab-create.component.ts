@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { LabService } from '../../service/lab.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Observable, throwError } from 'rxjs';
+import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { Lab } from '../../model/lab';
+import { Staff } from '../../model/staff';
+import { Patient } from '../../model/patient';
 
 @Component({
   selector: 'app-lab-create',
@@ -9,42 +12,50 @@ import { Observable, throwError } from 'rxjs';
   styleUrls: ['./lab-create.component.css']
 })
 export class LabCreateComponent implements OnInit {
-  type : string[] = [
-    'blood',
-    'urine',
-    'MRI'
-  ];
-  hidden : string = "[]"
-  labform : FormGroup;
-  validMessage :string = "";
+  labForm: FormGroup;
+  validMessage: string = "";
+  patient: Patient;
+  type : string[] = Lab.Types;
 
-  constructor(private labService:LabService) { }
+  constructor(private labService: LabService,
+              private fb: FormBuilder) { }
 
-  ngOnInit() {
-    this.labform = new FormGroup({
-      date: new FormControl('', Validators.required),
-      results: new FormControl('', Validators.required),
-      type: new FormControl('', Validators.required),
-      patient: new FormControl(),
-    });
-  }
+    ngOnInit() {
+      this.labForm = this.fb.group({
+        date: new FormControl('', Validators.required),
+        results: new FormControl('', Validators.required),
+        type: new FormControl('', Validators.required)
+      });
+    }
 
-  createStaff() {
+    onPatientAdded(patient: Patient) {
+      this.patient = patient;
+    }
 
-    if (this.labform.valid) {
-      this.validMessage = "Lab created successfully";
-      this.labService.addLab(this.labform.value).subscribe(
-        data => {
-          this.labform.reset();
-          return true;
-        },
-        error => {
-          return throwError(error);
-        }
-      )
-    } else {
-        this.validMessage = "Please fill out all required fields";
+    submitRegistration() {
+      if (this.labForm.valid) {
+        let labFormInfo = this.labForm.value;
+        let lab = new Lab();
+        lab.date = labFormInfo['date'];
+        lab.results = labFormInfo['results'];
+        lab.patient = this.patient.id;
+        lab.type = labFormInfo['type'];
+
+        this.labService.addLab(lab).subscribe(
+          data => {
+            this.labForm.reset();
+            this.patient = null;
+            this.validMessage = "Your lab record has been registered!";
+            return true;
+          },
+          error => {
+            this.validMessage = "Lab failed to register";
+            return Observable.throw(error);
+          }
+        )
+      }
+      else {
+        this.validMessage = "Please fill out the required fields.";
+      }
     }
   }
-
-}

@@ -60,7 +60,7 @@ public class StaffController {
     @GetMapping("/search/findByLastName")
     Iterable<StaffMember> findByLastName(@RequestParam("lastName") String lastName)
     {
-        return staffService.findByFirstName(lastName);
+        return staffService.findByLastName(lastName);
     }
 
     @GetMapping("/search/findByFirstNameAndLastName")

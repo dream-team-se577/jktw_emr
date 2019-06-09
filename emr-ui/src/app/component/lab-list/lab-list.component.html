@@ -1,0 +1,26 @@
+<div style="align:center">
+  <div class="container">
+    <table class="table table-bordered table-inverse">
+      <tr>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Results</th>
+        <th>Details</th>
+      </tr>
+      <tr *ngFor="let lab of labList">
+        <td>
+          {{lab.date}}
+        </td>
+        <td>
+          {{lab.type}}
+        </td>
+        <td>
+          {{lab.description}}
+        </td>
+        <td class="text-right">
+          <a routerLink="/labDetail/{{lab.id}}"> View Details </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

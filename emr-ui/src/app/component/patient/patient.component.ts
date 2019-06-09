@@ -9,10 +9,8 @@ import { Patient } from "../../model/patient";
   styleUrls: ['./patient.component.css']
 })
 export class PatientComponent implements OnInit {
-  public patients;
-  patientDetail : boolean;
-  patientId: number;
-  patient : Patient;
+  patients: number[];
+  patientCreate : boolean;
 
   constructor(private patientService: PatientService) { }
 
@@ -22,24 +20,9 @@ export class PatientComponent implements OnInit {
 
   getPatients(): void {
     this.patientService.getPatients().subscribe(
-      data => {this.patients = data},
+      (data : any[]) =>{this.patients = data.map(x => x.id)},
       err => console.error(err),
       () => console.log('patients loaded')
     );
   }
-
-  registerPatient() {
-    this.patientDetail = true;
-    this.patient = null;
-  }
-
-  getPatient(id: number) {
-    this.patientDetail = true;
-    this.patientService.getPatient(id).subscribe(
-      data => this.patient = <Patient> data,
-      err => console.error(err),
-      () => console.log('patients loaded')
-    );
-  }
-
 }

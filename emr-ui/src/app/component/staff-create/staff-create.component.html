@@ -1,39 +1,54 @@
 <div class="container">
-  <form [formGroup]="staffform" (ngSubmit)="createStaff()" novalidate>
-    <div *ngIf="validMessage != ''">
-      <h3 class="has-info">{{validMessage}}</h3>
-    </div>
-    <div class="form-group">
-      <label>First Name</label>
-      <input type="text" class="form-control" formControlName="firstName" required autofocus/>
-    </div>
-    <div class="form-group">
-      <label>Middle Name</label>
-      <input type="text" class="form-control" formControlName="middleName" required/>
-    </div>
-    <div class="form-group">
-      <label>Last Name</label>
-      <input type="text" class="form-control" formControlName="lastName" required/>
-    </div>
-    <div class="form-group">
-      <label>Role</label>
-      <select class="form-control" formControlName="role" required>
-        <option value="">Please select a role</option>
-        <option *ngFor="let r of role"
-                [value]="r">
-                {{r}}
-        </option>
-      </select>
-    </div>
-    <div class="form-group">
-      <input type="hidden" class="form-control" formControlName="addresses" value="{{hidden}}" />
-    </div>
-    <div class="form-group">
-      <input type="hidden" class="form-control" formControlName="emailAddresses" value="{{hidden}}" />
-    </div>
-    <div class="form-group">
-      <input type="hidden" class="form-control" formControlName="phoneNumbers" value="{{hidden}}" />
-    </div>
-    <button type="submit" class="btn btn-primary" >Submit</button>
+  <form [formGroup]="staffForm" (ngSubmit)="submitRegistration()" validate>
+    <fieldset [disabled]="lock">
+      <div *ngIf="validMessage != ''">
+        <h3 class="has-info">{{validMessage}}</h3>
+      </div>
+      <div class="form-group">
+        <label>Staff First Name</label>
+        <input type="text" class="form-control" formControlName="firstName" autofocus/>
+      </div>
+      <div class="form-group">
+        <label>Staff Middle Name</label>
+        <input type="text" class="form-control" formControlName="middleName"/>
+      </div>
+      <div class="form-group">
+        <label>Staff Last Name</label>
+        <input type="text" class="form-control" formControlName="lastName"/>
+      </div>
+      <div class="form-group">
+        <label>Role</label>
+        <select class="form-control" formControlName="role" required>
+          <option value="">Please select a role</option>
+          <option *ngFor="let t of roles"
+                  [value]="t">
+                  {{t}}
+          </option>
+        </select>
+      </div>
+      <div formArrayName="addresses">
+          <div *ngFor="let control of staffForm.controls['addresses'].controls; let i = index">
+              <button type="button" (click)="delAddress(i)">Delete</button>
+              <address-sub-component [addressForm]="staffForm.controls.addresses.controls[i]"></address-sub-component>
+          </div>
+      </div>
+      <button type="button" (click)="addAddress()">Add Address</button>
+      <div formArrayName="emailAddresses">
+          <div *ngFor="let control of staffForm.controls['emailAddresses'].controls; let i = index">
+              <button type="button" (click)="delEmail(i)">Delete</button>
+              <email-sub-component [emailForm]="staffForm.controls.emailAddresses.controls[i]"></email-sub-component>
+          </div>
+      </div>
+      <button type="button" (click)="addEmail()">Add Email</button>
+      <div formArrayName="phoneNumbers">
+          <div *ngFor="let control of staffForm.controls['phoneNumbers'].controls; let i = index">
+              <button type="button" (click)="delPhone(i)">Delete</button>
+              <phone-sub-component [phoneForm]="staffForm.controls.phoneNumbers.controls[i]"></phone-sub-component>
+          </div>
+      </div>
+      <button type="button" (click)="addPhone()">Add Phone Number</button>
+
+      <button type="submit" [disabled]="!staffForm.valid" class="btn btn-primary" >Submit</button>
+    </fieldset>
   </form>
 </div>

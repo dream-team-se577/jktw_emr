@@ -9,10 +9,8 @@ import { Appointment } from "../../model/appointment";
   styleUrls: ['./appointment.component.css']
 })
 export class AppointmentComponent implements OnInit {
-  public appointments;
+  appointments: number[];
   appointmentDetail : boolean;
-  appointmentId: number;
-  appointment : Appointment;
 
   constructor(private appointmentService: AppointmentService) { }
 
@@ -20,31 +18,24 @@ export class AppointmentComponent implements OnInit {
     this.getAppointments();
   }
 
-  registerAppointment() {
-    this.appointmentDetail = true;
-    this.appointment = null;
-  }
-
-  getAppointment(id: number) {
-    this.appointmentDetail = true;
-    this.appointmentService.getAppointment(id).subscribe(
-      data => this.appointment = <Appointment> data,
-      err => console.error(err),
-      () => console.log('appointment loaded')
-    );
-  }
-
   getAppointments(): void {
 		this.appointmentService.getAppointments().subscribe(
-      data =>{this.appointments = data},
+      (data : any[]) =>{
+        this.appointments = data.map(x => x.id);
+      },
       err => console.error(err),
       () => console.log('appointments loaded')
     );
 	}
 
-  delete(appointment): void {
-    this.appointments = this.appointments.filter(h => h !== appointment);
-    this.appointmentService.deleteAppointment(appointment).subscribe();
-  }
+  deleteAppointment(appointment: number): void {
+    if(!confirm("Are you sure to cancel this appointment?")) {
+      return;
+    }
 
+    this.appointments = this.appointments.filter(h => h !== appointment);
+    this.appointmentService.deleteAppointment(appointment).subscribe(
+      data => {this.getAppointments();}
+    );
+  }
 }

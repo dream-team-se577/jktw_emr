@@ -1,22 +1,12 @@
 # EmrUi
 
+## How to build this project
+
 Download Node.js (https://nodejs.org/en/)
 
 Download Yarn (https://yarnpkg.com/en/)
 
-Type "npm install -g @angular/cli"
-
-Type "npm install @angular-devkit/build-angular"
-
 Use "npm start" in project directory
-
-To Create your Own Service:
-- ng g service services/<serviceName>
-- Will create the service as <serviceName>.service.ts
-
-To Create your Own Component:
-- ng g component components/admin
-- should generate "components" folder with "admin" and tx file, html and css inside
 
 
 ## Generating Code:

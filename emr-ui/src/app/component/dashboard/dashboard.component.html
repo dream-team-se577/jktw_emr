@@ -1,22 +1,22 @@
 <div class="container">
   <button pButton label="Search Patient" (click)="mode = 'searchPatient'" [hidden]="mode == 'searchPatient'">Search Patient</button>
   <div [hidden]="mode != 'searchPatient'">
-    <app-patient-search></app-patient-search>
+    <app-patient-search (onPatientPicked)="onPatientPicked($event)"></app-patient-search>
   </div>
 
   <button pButton label="Search Lab Records" (click)="mode = 'searchLab'" [hidden]="mode == 'searchLab'">Search Lab Records</button>
   <div [hidden]="mode != 'searchLab'">
-    <app-lab-search></app-lab-search>
+    <app-lab-search (onLabPicked)="onLabRecordPicked($event)"></app-lab-search>
   </div>
 
   <button pButton label="Search Staff" (click)="mode = 'searchStaff'" [hidden]="mode == 'searchStaff'">Search Staff</button>
   <div [hidden]="mode != 'searchStaff'">
-    <app-staff-search></app-staff-search>
+    <app-staff-search (onStaffPicked)="onStaffPicked($event)"></app-staff-search>
   </div>
 
   <button pButton label="Search Appointments" (click)="mode = 'searchAppointment'" [hidden]="mode == 'searchAppointment'">Search Appointments</button>
   <div [hidden]="mode != 'searchAppointment'">
-    <app-appointment-search></app-appointment-search>
+    <app-appointment-search (onAppointmentPicked)="onAppointmentPicked($event)"></app-appointment-search>
   </div>
   <button pButton label="Cancel" (click)="mode = ''" [hidden]="mode == ''">Cancel</button>
 </div>

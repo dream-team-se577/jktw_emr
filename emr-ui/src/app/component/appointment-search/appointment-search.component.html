@@ -9,7 +9,7 @@
       <input type="text" class="form-control" formControlName="endDate"/>
     </div>
 
-    <button type="submit" [disabled]="!(appointmentForm.value['startDate'] || appointmentForm.value['endDate'])" class="btn btn-primary">Submit</button>
+    <button type="submit" [disabled]="!(appointmentForm.value['startDate'] || appointmentForm.value['endDate'])" class="btn btn-primary">Search Appointments</button>
   </form>
 
   <div *ngIf="validMessage != ''">
@@ -23,7 +23,6 @@
         <th>Type</th>
         <th>Date</th>
         <th>Results</th>
-        <th>Patient</th>
       </tr>
       <tr *ngFor="let appointment of appointmentList">
         <td>
@@ -37,9 +36,6 @@
         </td>
         <td>
           {{appointment.results}}
-        </td>
-        <td>
-          {{appointment.patient}}
         </td>
         <td class="text-right">
           <button pButton label="Select" (click)="pickAppointment(appointment)"> Select </button>
