@@ -5,7 +5,9 @@ Software Project for SE577:  Software Architecture
 
 This repository is for the final project for SE577:  Software Architecture at Drexel University.  It puts to use many different design patterns to implement a Electronic Medical Record (EMR) system.
 
-For more information on how to build the server, see emr_server/README.md.
+For instructions on how to build/run the server, see emr_server/README.md.
+
+For instructions on how to build/run the UI, see emr-ui/README.md.
 
 For more information on the architecture, see READEME.pdf.
 

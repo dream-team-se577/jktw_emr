@@ -3,9 +3,9 @@
     <button pButton label="Register" (click)="appointmentDetail=true" [hidden]="appointmentDetail">Register</button>
     <button pButton label="Hide" (click)="appointmentDetail=false" [hidden]="!appointmentDetail">Hide</button>
     <div [hidden]="!appointmentDetail">
-      <app-appointment-create></app-appointment-create>
+      <app-appointment-create (onAppointmentCreated)="appointemntCreated($event)"></app-appointment-create>
     </div>
-    <div *ngIf="appointments && appointments.length">
+    <div>
       <app-appointment-list (onAppointmentRemoved)="deleteAppointment($event)" [appointments]="appointments"></app-appointment-list>
     </div>
   </div>

@@ -46,6 +46,10 @@ DROP TABLE IF EXISTS patient_appointments;
 DROP TABLE IF EXISTS patient_lab_records;
 DROP TABLE IF EXISTS person;
 DROP TABLE IF EXISTS staff;
+DROP TABLE IF EXISTS staff_appointments;
+DROP TABLE IF EXISTS person_phone_numbers;
+DROP TABLE IF EXISTS person_email_addresses;
+DROP TABLE IF EXISTS person_addresses;
 SET FOREIGN_KEY_CHECKS = 1;
 ```  
 

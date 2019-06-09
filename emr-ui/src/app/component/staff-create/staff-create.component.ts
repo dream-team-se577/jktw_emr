@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { StaffService } from '../../service/staff.service';
 import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
@@ -15,6 +15,8 @@ import { Email } from '../../model/email';
 export class StaffCreateComponent implements OnInit {
   staffForm: FormGroup;
   validMessage: string = "";
+  roles: string[] = Staff.Roles;
+  @Output() onStaffCreated: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private staffService: StaffService,
               private fb: FormBuilder) { }
@@ -99,6 +101,7 @@ export class StaffCreateComponent implements OnInit {
           data => {
             this.staffForm.reset();
             this.validMessage = "Your staff has been registered!";
+            this.onStaffCreated.emit(this.validMessage);
             return true;
           },
           error => {

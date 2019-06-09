@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PatientService } from '../../service/patient.service';
+import { AppointmentService } from '../../service/appointment.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -25,6 +26,7 @@ export class PatientFormComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private patientService: PatientService,
+              private appointmentService: AppointmentService,
               private fb: FormBuilder,
               private location: Location) { }
 
@@ -102,32 +104,32 @@ export class PatientFormComponent implements OnInit {
     }
   }
 
-  addAddress(): void {
+  addAddress() {
       const addressControl = <FormArray> this.patientForm.controls['addresses'];
       addressControl.push(new Address().toFormGroup(this.fb));
   }
 
-  delAddress(index: number): void {
+  delAddress(index: number) {
       const arrayControl = <FormArray>this.patientForm.controls['addresses'];
       arrayControl.removeAt(index);
   }
 
-  addEmail(): void {
+  addEmail() {
       const emailControl = <FormArray> this.patientForm.controls['emailAddresses'];
       emailControl.push(new Email().toFormGroup(this.fb));
   }
 
-  delEmail(index: number): void {
+  delEmail(index: number) {
       const arrayControl = <FormArray>this.patientForm.controls['emailAddresses'];
       arrayControl.removeAt(index);
   }
 
-  addPhone(): void {
+  addPhone() {
       const phoneControl = <FormArray> this.patientForm.controls['phoneNumbers'];
       phoneControl.push(new Phone().toFormGroup(this.fb));
   }
 
-  delPhone(index: number): void {
+  delPhone(index: number) {
       const arrayControl = <FormArray>this.patientForm.controls['phoneNumbers'];
       arrayControl.removeAt(index);
   }
@@ -171,7 +173,6 @@ export class PatientFormComponent implements OnInit {
 
       this.patientService.updatePatient(patient).subscribe(
         data => {
-          this.patientForm.reset();
           this.validMessage = "Your patient has been updated!";
           return true;
         },
@@ -179,10 +180,30 @@ export class PatientFormComponent implements OnInit {
           this.validMessage = "Patient failed to update";
           return Observable.throw(error);
         }
-      )
+      );
     }
     else {
       this.validMessage = "Please fill out the required fields.";
     }
+  }
+
+  deleteAppointment(appointment: number): void {
+    if(!confirm("Are you sure to cancel this appointment?")) {
+      return;
+    }
+
+    let tmp = [];
+    this.appointments.forEach(x => tmp.push(x));
+    this.appointments = tmp.filter(h => h !== appointment);
+    this.appointmentService.deleteAppointment(appointment).subscribe(
+      data => {
+        this.validMessage = "Appointment has been canceled!";
+        return true;
+      },
+      error => {
+        this.validMessage = "Failed to cancel appointment!";
+        return Observable.throw(error);
+      }
+    );
   }
 }

@@ -1,4 +1,5 @@
 <div class="container">
+  <label><u>Search for an appointment</u></label>
   <form [formGroup]="appointmentForm" (ngSubmit)="submitSearch()" validate>
     <div class="form-group">
       <label>Start Date (YYYY-MM-dd HH:mm)</label>
@@ -22,7 +23,7 @@
         <th>Id</th>
         <th>Type</th>
         <th>Date</th>
-        <th>Results</th>
+        <th>Description</th>
       </tr>
       <tr *ngFor="let appointment of appointmentList">
         <td>
@@ -35,7 +36,7 @@
           {{appointment.date}}
         </td>
         <td>
-          {{appointment.results}}
+          {{appointment.description}}
         </td>
         <td class="text-right">
           <button pButton label="Select" (click)="pickAppointment(appointment)"> Select </button>

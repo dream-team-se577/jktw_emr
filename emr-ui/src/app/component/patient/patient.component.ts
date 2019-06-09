@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PatientService } from '../../service/patient.service';
 import { PatientFormComponent } from "../patient-form/patient-form.component";
 import { Patient } from "../../model/patient";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-patient',
@@ -12,10 +13,15 @@ export class PatientComponent implements OnInit {
   patients: number[];
   patientCreate : boolean;
 
-  constructor(private patientService: PatientService) { }
+  constructor(private patientService: PatientService,
+              private location: Location) { }
 
   ngOnInit() {
     this.getPatients();
+  }
+
+  patientCreated(message: string): void {
+    location.reload();
   }
 
   getPatients(): void {

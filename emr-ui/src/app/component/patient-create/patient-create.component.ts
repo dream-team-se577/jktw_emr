@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { PatientService } from '../../service/patient.service';
 import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
@@ -15,6 +15,7 @@ import { Email } from '../../model/email';
 export class PatientCreateComponent implements OnInit {
   patientForm: FormGroup;
   validMessage: string = "";
+  @Output() onPatientCreated: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private patientService: PatientService,
               private fb: FormBuilder) { }
@@ -102,6 +103,7 @@ export class PatientCreateComponent implements OnInit {
           data => {
             this.patientForm.reset();
             this.validMessage = "Your patient has been registered!";
+            this.onPatientCreated.emit(this.validMessage);
             return true;
           },
           error => {

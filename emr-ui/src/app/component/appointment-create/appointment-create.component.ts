@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AppointmentService } from '../../service/appointment.service';
 import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
@@ -17,6 +17,7 @@ export class AppointmentCreateComponent implements OnInit {
   patient: Patient;
   staff: number[] = [];
   type : string[] = Appointment.Types;
+  @Output() onAppointmentCreated: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private appointmentService: AppointmentService,
               private fb: FormBuilder) { }
@@ -66,6 +67,7 @@ export class AppointmentCreateComponent implements OnInit {
           this.staff = [];
           this.patient = null;
           this.validMessage = "Your appointment has been registered!";
+          this.onAppointmentCreated.emit(this.validMessage);
           return true;
         },
         error => {

@@ -27,6 +27,13 @@ export class LabFormComponent implements OnInit {
               private location: Location) { }
 
   ngOnInit() {
+    // Still got to initialize this here before we wait on server
+    this.labForm = this.fb.group({
+      date: new FormControl('', Validators.required),
+      results: new FormControl(),
+      type: new FormControl('', Validators.required)
+    });
+
     this.getLab();
   }
 

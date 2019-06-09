@@ -3,7 +3,7 @@
     <button pButton label="Register" (click)="labCreate=true" [hidden]="labCreate">Register</button>
     <button pButton label="Hide" (click)="labCreate=false" [hidden]="!labCreate">Hide</button>
     <div [hidden]="!labCreate">
-      <app-lab-create></app-lab-create>
+      <app-lab-create (onLabCreated)="labCreated($event)"></app-lab-create>
     </div>
     <div>
       <app-lab-list [labs]="labs"></app-lab-list>
