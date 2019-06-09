@@ -1,5 +1,6 @@
 <div style="align:center">
   <div class="container">
+    <label>Lab Record List</label>
     <table class="table table-bordered table-inverse">
       <tr>
         <th>Date</th>
@@ -15,7 +16,7 @@
           {{lab.type}}
         </td>
         <td>
-          {{lab.description}}
+          {{lab.results}}
         </td>
         <td class="text-right">
           <a routerLink="/labDetail/{{lab.id}}"> View Details </a>

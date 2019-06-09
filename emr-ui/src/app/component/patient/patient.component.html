@@ -3,7 +3,7 @@
     <button pButton label="Register" (click)="patientCreate=true" [hidden]="patientCreate">Register</button>
     <button pButton label="Hide" (click)="patientCreate=false" [hidden]="!patientCreate">Hide</button>
     <div [hidden]="!patientCreate">
-      <app-patient-create></app-patient-create>
+      <app-patient-create (onPatientCreated)="patientCreated($event)"></app-patient-create>
     </div>
     <div>
       <app-patient-list [patients]="patients"></app-patient-list>

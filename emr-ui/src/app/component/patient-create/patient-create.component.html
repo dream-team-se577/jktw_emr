@@ -1,6 +1,6 @@
 <div class="container">
   <form [formGroup]="patientForm" (ngSubmit)="submitRegistration()" validate>
-    <fieldset [disabled]="lock">
+    <fieldset>
       <div *ngIf="validMessage != ''">
         <h3 class="has-info">{{validMessage}}</h3>
       </div>
@@ -21,21 +21,21 @@
         <input type="text" class="form-control" formControlName="ssn"/>
       </div>
       <div formArrayName="addresses">
-          <div *ngFor="let control of patientForm.controls['addresses'].controls; let i = index">
+          <div *ngFor="let control of patientForm.controls['addresses']['controls']; let i = index">
               <button type="button" (click)="delAddress(i)">Delete</button>
               <address-sub-component [addressForm]="patientForm.controls.addresses.controls[i]"></address-sub-component>
           </div>
       </div>
       <button type="button" (click)="addAddress()">Add Address</button>
       <div formArrayName="emailAddresses">
-          <div *ngFor="let control of patientForm.controls['emailAddresses'].controls; let i = index">
+          <div *ngFor="let control of patientForm.controls['emailAddresses']['controls']; let i = index">
               <button type="button" (click)="delEmail(i)">Delete</button>
               <email-sub-component [emailForm]="patientForm.controls.emailAddresses.controls[i]"></email-sub-component>
           </div>
       </div>
       <button type="button" (click)="addEmail()">Add Email</button>
       <div formArrayName="phoneNumbers">
-          <div *ngFor="let control of patientForm.controls['phoneNumbers'].controls; let i = index">
+          <div *ngFor="let control of patientForm.controls['phoneNumbers']['controls']; let i = index">
               <button type="button" (click)="delPhone(i)">Delete</button>
               <phone-sub-component [phoneForm]="patientForm.controls.phoneNumbers.controls[i]"></phone-sub-component>
           </div>

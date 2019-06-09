@@ -73,7 +73,7 @@ public class Appointment {
     private Patient patient;
     @NotNull
     private String type;
-    @ManyToMany(cascade={CascadeType.ALL})
+    @ManyToMany(cascade={CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
     @NotNull
     @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id", scope = StaffMember.class, resolver = EntityIdResolver.class)
     @JsonIdentityReference(alwaysAsId=true) // otherwise first ref as POJO, others as id

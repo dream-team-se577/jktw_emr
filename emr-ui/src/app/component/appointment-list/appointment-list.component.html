@@ -1,30 +1,36 @@
 <div style="align:center">
   <div class="container">
-    <table class="table table-bordered table-inverse">
-      <tr>
-        <th>Date</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Details</th>
-        <th>Remove</th>
-      </tr>
-      <tr *ngFor="let appointment of apptList">
-        <td>
-          {{appointment.date}}
-        </td>
-        <td>
-          {{appointment.type}}
-        </td>
-        <td>
-          {{appointment.description}}
-        </td>
-        <td class="text-right">
-          <a routerLink="/appointmentDetail/{{appointment.id}}"> View Details </a>
-        </td>
-        <td class="text-right">
-          <button (click)="remove(appointment.id)">Remove</button>
-        </td>
-      </tr>
-    </table>
+    <div *ngIf="apptList && apptList.length">
+      <label>Appointment List</label>
+      <table class="table table-bordered table-inverse">
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Details</th>
+          <th>Remove</th>
+        </tr>
+        <tr *ngFor="let appointment of apptList">
+          <td>
+            {{appointment.date}}
+          </td>
+          <td>
+            {{appointment.type}}
+          </td>
+          <td>
+            {{appointment.description}}
+          </td>
+          <td class="text-right">
+            <a routerLink="/appointmentDetail/{{appointment.id}}"> View Details </a>
+          </td>
+          <td class="text-right">
+            <button type="button" (click)="remove(appointment.id)">Remove</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="!apptList || !apptList.length">
+      <h3> No appointments scheduled </h3>
+    </div>
   </div>
 </div>

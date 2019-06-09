@@ -22,6 +22,7 @@ export class AppointmentListComponent implements OnInit, OnChanges {
       return;
     }
 
+    this.apptList = [];
     this.appointments.forEach(a => {
       this.appointmentService.getAppointment(a).subscribe(
         data => {
@@ -34,6 +35,11 @@ export class AppointmentListComponent implements OnInit, OnChanges {
           }
 
           this.apptList.push(newApp);
+          this.apptList.sort(function (appt1, appt2) {
+          	if (appt1.date > appt2.date) return -1;
+          	if (appt1.date < appt2.date) return 1;
+          });
+
           return true;
         },
         error => {

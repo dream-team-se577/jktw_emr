@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StaffService } from '../../service/staff.service';
 import { StaffFormComponent } from "../staff-form/staff-form.component";
 import { Staff } from "../../model/staff";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-staff',
@@ -12,10 +13,15 @@ export class StaffComponent implements OnInit {
   staff: number[];
   staffCreate : boolean;
 
-  constructor(private staffService: StaffService) { }
+  constructor(private staffService: StaffService,
+              private location: Location) { }
 
   ngOnInit() {
     this.getStaffs();
+  }
+
+  staffCreated(message: string): void {
+    location.reload();
   }
 
   getStaffs(): void {

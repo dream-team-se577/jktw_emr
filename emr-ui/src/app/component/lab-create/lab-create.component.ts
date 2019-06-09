@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { LabService } from '../../service/lab.service';
 import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
@@ -16,6 +16,7 @@ export class LabCreateComponent implements OnInit {
   validMessage: string = "";
   patient: Patient;
   type : string[] = Lab.Types;
+  @Output() onLabCreated: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private labService: LabService,
               private fb: FormBuilder) { }
@@ -46,6 +47,7 @@ export class LabCreateComponent implements OnInit {
             this.labForm.reset();
             this.patient = null;
             this.validMessage = "Your lab record has been registered!";
+            this.onLabCreated.emit(this.validMessage);
             return true;
           },
           error => {

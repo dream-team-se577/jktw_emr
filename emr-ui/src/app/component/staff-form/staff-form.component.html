@@ -35,27 +35,27 @@
         </select>
       </div>
       <div formArrayName="addresses">
-          <div *ngFor="let control of staffForm.controls['addresses'].controls; let i = index">
-              <button type="button" (click)="delAddress(i)">Delete</button>
+          <div *ngFor="let control of staffForm.controls['addresses']['controls']; let i = index">
+              <button type="button" (click)="delAddress(i)">Delete Address</button>
               <address-sub-component [addressForm]="staffForm.controls.addresses.controls[i]"></address-sub-component>
           </div>
       </div>
       <button type="button" (click)="addAddress()">Add Address</button>
       <div formArrayName="emailAddresses">
-          <div *ngFor="let control of staffForm.controls['emailAddresses'].controls; let i = index">
-              <button type="button" (click)="delEmail(i)">Delete</button>
+          <div *ngFor="let control of staffForm.controls['emailAddresses']['controls']; let i = index">
+              <button type="button" (click)="delEmail(i)">Delete Email</button>
               <email-sub-component [emailForm]="staffForm.controls.emailAddresses.controls[i]"></email-sub-component>
           </div>
       </div>
       <button type="button" (click)="addEmail()">Add Email</button>
       <div formArrayName="phoneNumbers">
-          <div *ngFor="let control of staffForm.controls['phoneNumbers'].controls; let i = index">
-              <button type="button" (click)="delPhone(i)">Delete</button>
+          <div *ngFor="let control of staffForm.controls['phoneNumbers']['controls']; let i = index">
+              <button type="button" (click)="delPhone(i)">Delete Phone Number</button>
               <phone-sub-component [phoneForm]="staffForm.controls.phoneNumbers.controls[i]"></phone-sub-component>
           </div>
       </div>
       <button type="button" (click)="addPhone()">Add Phone Number</button>
-
+      <br/>
       <button type="submit" [disabled]="!staffForm.valid" class="btn btn-primary" >Submit</button>
     </fieldset>
   </form>

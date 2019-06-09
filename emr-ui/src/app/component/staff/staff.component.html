@@ -3,10 +3,10 @@
     <button pButton label="Register" (click)="staffCreate=true" [hidden]="staffCreate">Register</button>
     <button pButton label="Hide" (click)="staffCreate=false" [hidden]="!staffCreate">Hide</button>
     <div [hidden]="!staffCreate">
-      <app-staff-create></app-staff-create>
+      <app-staff-create (onStaffCreated)="staffCreated($event)"></app-staff-create>
     </div>
     <div>
-      <app-staff-list (onStaffRemoved)="deleteStaff($event)" [staff]="staff"></app-staff-list>
+      <app-staff-list [staff]="staff"></app-staff-list>
     </div>
   </div>
 </div>

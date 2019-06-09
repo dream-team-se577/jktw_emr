@@ -164,7 +164,6 @@ export class StaffFormComponent implements OnInit {
 
       this.staffService.updateStaff(staff).subscribe(
         data => {
-          this.staffForm.reset();
           this.validMessage = "Your staff has been updated!";
           return true;
         },
