@@ -1,10 +1,17 @@
 # EmrUi
 
-## How to build this project
+## How to build and run this project
+
+First, make sure you have the emr_server running, for more instructions see the README.md in the "emr_server" directory on the top level of this repo.
 
 Download Node.js (https://nodejs.org/en/)
 
 Download Yarn (https://yarnpkg.com/en/)
+
+In this project directory, run:
+1. "npm install -g @angular/cli"
+2. "ng set --global packageManager=yarn"
+3. You may also need to run: "npm install --save @angular-devkit/build-angular"
 
 ### Debug Build
 
