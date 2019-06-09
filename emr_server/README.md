@@ -1,6 +1,11 @@
 # EMR Server
 Software Project for SE577:  Software Architecture
 
+## How to build/run this server
+
+1. You will first need to start a mySQL database with name emr_server, username "root" and password "se577sql".  For more details, see the "Starting the database" section of this README
+2. Use the Maven wrapper in this repo to build with Maven.  See the "To Build and Run Without IntelliJ" sectio below.
+
 ## How it's made
 
 This code was built in the following steps:
